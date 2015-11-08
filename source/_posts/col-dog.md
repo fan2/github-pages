@@ -3,7 +3,7 @@ date: 2015-11-08 20:04:46
 tags: 故乡,拗口
 ---
 
-![col.tree](images/col.dog/coltree.jpg)
+![col.tree](https://github.com/fan2/github-pages/blob/master/source/_posts/images/col.dog/coltree.jpg)
 
 记忆中的坳口  
 风总是很大  
