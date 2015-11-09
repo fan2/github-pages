@@ -3,16 +3,14 @@ date: 2015-11-08 20:04:46
 tags: 故乡,坳口
 ---
 
+<hr>
+
 ```
 col 英[kɒl] 美[kɑ:l]
 n.	坳; 山口; 关口，峡路，关隘; 山坞;
-
-[col.dog]: a dog standing on the col.
 ```
 
-<!-- http://7xo5uz.com1.z0.glb.clouddn.com/coltree.jpg -->
-
-![一棵被遗弃在坳口上的树](https://raw.githubusercontent.com/fan2/github-pages/master/source/_posts/images/col.dog/coltree.jpg)
+![一棵被遗弃在坳口上的树](http://7xo5uz.com1.z0.glb.clouddn.com/coltree.jpg)
 
 记忆中的坳口  
 风总是很大  
