@@ -66,6 +66,20 @@ pagination_dir: page
 ## Themes: http://hexo.io/themes/
 theme: yelee #next # 默认主题是landscape
 
+Plugins:
+- hexo-generator-feed
+- hexo-generator-sitemap
+
+#sitemap
+sitemap:
+  path: sitemap.xml
+
+#Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html
 deploy:
