@@ -8,7 +8,7 @@ subtitle: just do IT #博客副标题
 description: #网站描述, 用于爬虫抓取的关键词
 author: Thomas Fan #作者名字
 email: phunxm@gmail.com #邮箱地址
-language: zh-CN #语言：中国大陆简体中文的标准语系地区码是zh-CN
+language: zh-Hans #zh-hk #语言：中国大陆简体中文的标准语系地区码是zh-CN
 timezone:
 
 # URL
@@ -64,7 +64,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: http://hexo.io/plugins/
 ## Themes: http://hexo.io/themes/
-theme: yelee #next # 默认主题是landscape
+theme: next # yelee # 默认主题是landscape
 
 Plugins:
 - hexo-generator-feed
