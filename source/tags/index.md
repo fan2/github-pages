@@ -1,5 +1,4 @@
-layout: tags
-title: tags
-original: false
+title: 标签
+type: "tags"
 comments: false
 ---
