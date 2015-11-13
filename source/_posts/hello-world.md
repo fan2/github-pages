@@ -1,5 +1,5 @@
 title: 基于 Hexo 和 GitHub Pages 搭建博客
-date: 2015-11-08 19:27:00
+date: 2015-11-12 19:27:00
 categories: Hexo
 tags: 博客志
 ---

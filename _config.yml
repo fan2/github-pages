@@ -22,9 +22,18 @@ permalink_defaults:
 links_title: 友情链接
 # links
 links:
-  弦苦: http://blog.csdn.net/phunxm
-  王威: http://www.sadpast.com/
-  黎腾: http://litten.github.io/
+  myCSDN: http://blog.csdn.net/phunxm
+  sadpast: http://www.sadpast.com/
+  litten: http://litten.github.io/
+  ghostzhang: http://blog.cssforest.org/
+  唐巧: http://blog.devtang.com/
+  objccn: http://objccn.io/
+  周智勋: http://beyondvincent.com/
+  雷纯锋: http://blog.leichunfeng.com/
+  枫影阁: http://justinyan.me/
+  張琮翔: http://blog.vgod.tw/
+  sunnyxx: http://blog.sunnyxx.com/
+  onevcat: http://onevcat.com/
 
 # Directory
 source_dir: source
