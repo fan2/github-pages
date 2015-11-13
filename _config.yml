@@ -18,6 +18,14 @@ root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
+# title, chinese available
+links_title: 友情链接
+# links
+links:
+  弦苦: http://blog.csdn.net/phunxm
+  王威: http://www.sadpast.com/
+  黎腾: http://litten.github.io/
+
 # Directory
 source_dir: source
 public_dir: public
