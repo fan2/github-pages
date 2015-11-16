@@ -4,29 +4,59 @@ categories: Hexo
 tags: 博客志
 ---
 
-本文详细记录了从安装 `node.js` / `Hexo` 到 使用 `hexo` 发布 markdown 格式的博客并托管到 GitHub 的全过程。
+本文详细记录了从安装 node.js / Hexo 到 使用 hexo 发布 markdown 格式的博客并托管到 GitHub 的全过程。
 
 <!--more-->
 
-## 安装 node.js
+## 配置环境
+本文的操作流程和步骤基于 MacBook Pro + OS X EI Capitan 平台。
 
-> Node.js® is a JavaScript runtime built on [Chrome's V8 JavaScript engine][]. Node.js uses an event-driven, non-blocking I/O model that makes it lightweight and efficient. Node.js' package ecosystem, [npm][], is the largest ecosystem of open source libraries in the world.
+## 安装 Node.js + NPM
+### 什么是 Node.js ?
+[Node.js][nodejs-cn] 是一个基于 [Chrome V8][] 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。Node.js 的包管理器 [npm][]，是全球最大的跨平台开源库生态系统。  
+正如 [维基百科][] 所说：“Node.js 是谷歌 V8 引擎、libuv 平台抽象层以及主体使用 Javscript 编写的核心库三者集合的一个包装外壳。”   
 
+> 注：V8是谷歌开发的，目前公认最快的 Javascript 解析引擎；libuv 是一个开源的、为 Node 定制而生的跨平台异步 IO 库。
+
+Node.js 服务器端和网络应用程序是使用 JavaScript 脚本语言编写，并可以在 Mac OS X、Microsoft Windows 和 Linux 内的 Node.js 运行时运行。  
+Node.js还提供了丰富的各种模块的 [JavaScript][Node.js API] 库，从而简化了 Node.js 的使用，方便 Web 应用程序的研究与开发。
+
+> Node.js = Runtime Environment + JavaScript Library
+
+[Node.js 究竟是什么？][] [为什么要用 Node.js ?][]  
+[使用 Node.js 的优势和劣势都有哪些？][] [谁在使用 Node.js ?][]  
+
+### 安装 Node.js
+可以到 [Node.js 官网][nodejs-en] 上下载最新的 node-v5.0.0.pkg for OS X (x64) 安装包到本地进行安装。  
+也可以使用 brew（The missing package manager for OS X）包管理器命令行工具进行安装。  
+#### Homebrew
+brew 全称为 [Homebrew][]，是 UNIX 上的软件包管理工具。  
+
+> Homebrew  is  the easiest and most flexible way to install the UNIX tools.
+
+在终端使用 `brew -v` 或 `brew --version` 命令来查看 Mac 上安装的 Homebrew 版本：
+
+```Shell
+➜  ~  brew -v  
+Homebrew 0.9.5 (git revision 9cbe8; last commit 2015-11-08)
+```
+
+如果没有安装 brew，可在 [Mac 上安装 Homebrew][] [使 OS X 更完整][]。
+
+#### brew install node
 执行 `brew install node` 命令使用 brew 安装 node，提示不能创建 `/usr/local/Cellar` 目录，原因是没有 `/usr/local` 的写权限。
+
+```Shell
+➜  ~  brew install node
+Error: Could not create /usr/local/Cellar
+Check you have permission to write to /usr/local
+```
 
 **[解决方法][brew_install_write_permission_issue]：**
 
 > 执行 `chown` 命令改变 `/usr/local` 的所有者为 `whoami` ，`-R` 表示递归（Recursive）。
 
 ```Shell
-➜  ~  brew install node
-Error: Could not create /usr/local/Cellar
-Check you have permission to write to /usr/local
-
-➜  ~  sudo chmod -R g+w /usr/local
-Error: Could not create /usr/local/Cellar
-Check you have permission to write to /usr/local
-
 ➜  ~  whoami
 faner
 
@@ -42,25 +72,24 @@ Bash completion has been installed to:
 🍺  /usr/local/Cellar/node/4.2.1: 2738 files, 36M
 ```
 
-执行 `node -v` 命令查看安装的 node.js 版本：
+node installed completion 之后，执行 `node -v` 命令可查看安装的 node.js 版本：
 
 ```Shell
 ➜  ~  node -v
 v4.2.1
 ```
 
-## 安装 NPM
-NPM（Nodejs Packager Manager），是 Node.js 包管理器。
-
-在安装新版的 `node.js` 时，包中已经集成了 npm 包管理工具。  
-可执行 `npm -v` 验证版本：
+#### npm
+Node.js 默认内置了模块管理工具 —— NPM（Node Package Manager），其灵感来源于 [RubyGems][]（具有版本和依赖管理功能，可以通过在线资料库便捷安装可重用的组件的管理工具）。  
+NPM 生态系统向所有人开放，任何人都可以发布自己的模块，所有的模块都可以在 NPM 资料库中找到。一个完整的公用模块列表可以在 [NPM 的网站][] 上找到，也可以通过与 Node.js 一同安装的 NPM 客户端命令行工具访问。  
+可执行 `npm -v` 命令查看 `node.js` 集成的 npm 包管理工具的版本：
 
 ```Shell
 ➜  ~  npm -v
 2.14.7
 ```
 
-执行 `npm help` 命令可查看帮助。
+执行 `npm help` 命令可查看帮助：
 
 ```Shell
 ➜  ~  npm help
@@ -85,14 +114,16 @@ Config info can be viewed via: npm help config
 npm@2.14.7 /usr/local/lib/node_modules/npm
 ```
 
-执行 `npm -l` 命令可查看帮助详情。
+执行 `npm -l` 命令可查看帮助详情。  
+下文将通过 `npm install <pkg>` 命令来安装快速、简洁且高效的博客框架——[Hexo][]，并基于 GitPages 托管来搭建免费开源博客。
 
 ## NPM 安装 hexo
 ### npm install hexo
+执行 `npm install -g hexo` 命令安装 hexo：
 
 ```Shell
 ➜  ~  npm install -g hexo
- 
+
 > fsevents@0.3.8 install /usr/local/lib/node_modules/hexo/node_modules/nunjucks/node_modules/chokidar/node_modules/fsevents
 > node-gyp rebuild
 
@@ -111,7 +142,7 @@ hexo@3.1.1 /usr/local/lib/node_modules/hexo
 
 **说明：**
 
-> `-g` 表示全局安装, npm默认为当前项目安装。
+> npm默认为当前项目安装，`-g` 表示全局安装。
 
 ### hexo version
 可执行 `hexo -v` 或  `hexo -version` 命令来检验安装的 hexo 版本：
@@ -154,15 +185,21 @@ For more help, you can use 'hexo help [command]' for the detailed information
 or you can check the docs: http://hexo.io/docs/
 ```
 
-在线帮助文档：http://hexo.io/docs/
+**常用的 hexo 命令：**
 
+- hexo init `<blog>` ：
+- hexo n == hexo new
 - hexo g == hexo generate
 - hexo d == hexo deploy
 - hexo s == hexo server
-- hexo n == hexo new
+- hexo clean
+
+**hexo 在线帮助文档：**
+
+- <http://hexo.io/docs/>
 
 ## hexo init
-假设我们接下来将在本地工程目录 `Projects/git/blog` 下新建博客站点（WebSite）。  
+假设我们接下来将在本地工程目录 `Projects/git/blog` 下构建博客站点（WebSite）。  
 cd 进入 `Projects/git/blog` 目录，针对该目录执行 `hexo init` 命令。
 
 ```Shell
@@ -172,23 +209,52 @@ cd 进入 `Projects/git/blog` 目录，针对该目录执行 `hexo init` 命令�
 ➜  blog  hexo init
 INFO  Copying data to ~/Projects/git/blog
 INFO  You are almost done! Don't forget to run 'npm install' before you start blogging with Hexo!
-➜  blog  ls
-_config.yml  package.json scaffolds    source       themes
 ```
 
-`hexo init` 初始化成功后，可调用 `ls` 或 [`tree`][ls-tree-mac] 命令查看，hexo 在 blog 目录下生成了模板文件。
+### 博客模板
+`hexo init` 初始化成功后，可调用 `ls` 或 [`tree`][ls-tree-mac] 命令查看 hexo 在 blog 目录下生成的模板文件：
+
+```Shell
+➜  blog  ls
+_config.yml  package.json scaffolds    source       themes
+➜  blog  tree -L 2
+.
+├── _config.yml
+├── package.json
+├── scaffolds
+│   ├── draft.md
+│   ├── page.md
+│   └── post.md
+├── source
+│   └── _posts
+└── themes
+    └── landscape
+
+5 directories, 5 files
+```
 
 文件/目录     | 作用
 -------------|-------------------------
-package.json | 配置依赖包
-_config.yml  | 全局的配置文件
-source       | 存放博客源码（markdown文件）
-themes       | 存放主题皮肤的目录
+_config.yml  | 网站的配置信息
+package.json | 应用程序的信息，包括依赖包(dependencies)
+scaffolds    | 模板文件夹，Hexo 会根据 scaffold 来新建文件。
+source       | 资源文件夹，`_post` 目录存放博客源码（markdown文件）
+themes       | 主题文件夹，默认主题为landscape
 
+`source` 下除 `_posts` 文件夹之外，开头命名为 `_` (下划线)的文件 / 文件夹和隐藏的文件 将会被忽略。`/source/_posts` 目录下默认有一个欢迎页 —— `hello-world.md` 文件。  
+在下文使用 `hexo generate` 生成网站时，Hexo 会编译 Markdown 和 HTML 源文件，根据主题来生成静态页面。静态页面文件将会被存放到 `public` 文件夹，而其他文件会被拷贝过去视作资源。
 
-`./source/_posts` 目录下默认有一个欢迎页 —— `hello-world.md` 文件。
+### npm install
+此时，尝试执行 `hexo generate` 生成包含 Hello World 首页的博客，将提示需要执行
+`npm install hexo --save` :
 
-根据 `hexo init` 的下一步提示，需要执行 `npm install` 安装 package.json 里的依赖包。
+```Shell
+➜  blog  hexo generate
+ERROR Local hexo not found in ~/Projects/git/blog
+ERROR Try running: 'npm install hexo --save'
+```
+
+实际上，我们已经执行过 `npm install hexo` 。根据上一步 `hexo init` 的提示，在正式 blogging with Hexo 之前，需要执行 `npm install` 命令安装 `package.json` 里的依赖包（Dependencies）：
 
 ```
 ➜  blog  hexo generate
@@ -202,10 +268,10 @@ _config.yml  node_modules package.json scaffolds    source       themes
 
 ```
 
-`ls` 查看目录下将多出 `node_modules` 文件夹，其中存放安装的依赖包。
+`ls` 可以查看到目录下将多出 `node_modules` 文件夹，其中存放 `npm install` 安装的依赖包。
 
 ## hexo generate
-上面，我们在执行 `hexo init` 后，再执行 `npm install` 安装了 package.json 里所依赖的包。此时，执行 `hexo generate` 命令将编译（只有欢迎页：`hello-world.md`）生成待发布的文件。
+上面，我们在执行 `hexo init` 后，再执行 `npm install` 安装了 package.json 所依赖的包。此时，执行 `hexo generate` 命令将编译（只有欢迎页：`hello-world.md`）生成待发布的博客文件。
 
 ```Shell
 ➜  blog  hexo generate
@@ -244,10 +310,13 @@ _config.yml  node_modules public       source
 db.json      package.json scaffolds    themes
 ```
 
-`ls` 查看目录下将生成 `public` 和 `db.json` 这两个文件夹。  
-生成的 `public` 文件夹存放编译后的静态网站（html+css+js），也就是最后要发布的文件夹。
+`ls` 查看目录下将生成 `public` 和 `db.json` 这两个文件夹。
 
-在 public 目录执行 `tree -L 2`，可以查看其目录结构：
+1. `db.json` —— json格式的静态常量数据库。  
+2. `public` 文件夹存放编译后的静态网站（html+css+js），也就是最后要发布的博客。  
+
+### public
+在 public 目录下执行 `tree -L 2`，可以查看其目录结构：
 
 ```Shell
 ➜  blog  cd public 
@@ -278,12 +347,16 @@ db.json      package.json scaffolds    themes
     └── script.js
 ```
 
-其中 `index.html` 为网站首页。
+- `index.html` 为网站首页。
+- `js/` ：存放 hexo 的功能 js。
+- `css/` ：存放 css 样式文件。
+- `archives/` ：存放博客归档。
+- [`fancybox`][] 是一款优秀的 [jquery 插件][]，它能够展示[丰富的弹出层效果][]。
 
 ## hexo server
-上面通过 `init` 和 `generate` 之后，已经生成网站了。此时，只包含一个默认首页 hello-world.md。  
+上面通过 `init` 和 `generate` 之后，已经生成博客网站了。此时，只包含一个默认首页 hello-world.md。  
 
-执行 `hexo server` 可启动 hexo server 进行本地调试：
+执行 `hexo server` 可启动 **hexo server** 进行本地调试：
 
 ```Shell
 ➜  blog  hexo server
@@ -292,10 +365,10 @@ INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.
 ➜  blog  
 ```
 
-在浏览器中访问 `http://localhost:4000` 可访问只含欢迎页和默认主题的 hexo 博客了。  
-![hexo-hello_world](http://7xo5uz.com1.z0.glb.clouddn.com/hexo-hello.png)
+在浏览器中输入 `http://localhost:4000` 即可访问只含欢迎页和默认主题的 hexo 博客了。  
+![hexo-hello_world](hexo-hello_world.png)
 
-按下 `Ctrl+C` 关闭退出 hexo 服务器。
+按下 `Ctrl+C` 退出 hexo 服务器。
 
 ## hexo deploy
 ### 配置 Deployment 
@@ -312,26 +385,29 @@ deploy:
 ```
 
 **注意：**
-1. Repository：url必须是SSH形式的，而不能是HTTPS形式，否则会出现错误：`is not a valid repositor URL!`。
-2. 使用SSH url，如果电脑没有开放SSH 端口，会致部署失败：
+
+1. Repository：url 必须是 SSH 形式的，不支持 HTTPS 形式，否则会出现错误：`is not a valid repositor URL!`。  
+2. 使用 SSH url，如果电脑没有开放 SSH 端口，会致部署失败：
 
 	> fatal: Could not read from remote repository.
 	> Please make sure you have the correct access rights and the repository exists.
 
-3. 如果是为一个项目制作介绍网站，那么需要把branch设置为gh-pages。
+3. 如果是为一个项目制作介绍网站，那么需要把 branch 设置为 gh-pages 。
 
 ### hexo deploy
-执行 `hexo deploy` ，将静态网站代码（public）上传到 github 上。
+执行 `hexo deploy` ，将静态网站代码（public/*）上传到 github 上。
 
 ```Shell
 ➜  blog hexo deploy
 ERROR Deployer not found: github
 ```
 
+原因是在 hexo 3.0 之后, 不仅 github 的 deploy 的 type 从 github 改为了 git，其中的 deploy 功能也被单独做成一个模块，需要另外安装。所以我们需要安装 **hexo-deployer-git**。
+
 **解决方案：**
 
 1. [将 `github` 修改为 `git`](http://www.v2ex.com/t/175940)， 还是报错；
-2. [安装 `hexo-deployer-git`](http://blog.163.com/gis_warrior/blog/static/19361717320153100184696/), 
+2. [安装 `hexo-deployer-git`](http://blog.163.com/gis_warrior/blog/static/19361717320153100184696/):
 
 ```Shell
 ➜  blog npm install hexo-deployer-git --save
@@ -343,9 +419,10 @@ ERROR Deployer not found: github
 
 ```
 
+其中 `--save` 参数用于把模块的版本号添加到 package.json 文件中的依赖里（dependencies），否则在安装完之后需要手动添加。  
 下载安装完成后，`node_modules` 下将新增目录 `hexo-deployer-git`。
 
-此时，重新执行 `hexo deploy` 成功！
+此时，重新执行 `hexo deploy` ，提交发布成功！
 
 ```Shell
 ➜  blog hexo deploy                         
@@ -369,11 +446,12 @@ INFO  Deploy done: git
 
 **注意：**
 
-注意部署会覆盖掉你之前在版本库 `fan2.github.io` 中存放的文件。
+1. 部署会覆盖掉你之前在版本库 `fan2.github.io` 中存放的文件。  
+2. `hexo deploy` 时将在博客根目录下生成 `.deploy_git` 文件夹，下一次 `hexo deploy` 将会基于 diff 提交差异量。
 
 ## 图片存储
-在 `source` 下建立与博客 `blog.md` 同名的目录 `blog` 其中存放图片文件，最终首页相对引用成功，点击进入文章，相对引用失败！
-可参照 [hexo 资源文件夹][hexo_resource] ，看看如何设置 asset 相对路径。或者采用[七牛][[qiniu]]做图床，使用绝对路径。
+在 `source` 下建立与博客 `blog.md` 同名的目录 `blog` ，用于存放图片等资源文件，首页相对引用成功；但点击进入文章，相对引用失败！  
+可参照 [hexo 资源文件夹][hexo_resource] ，看看如何设置 asset 相对路径。也可采用[七牛][qiniu]等云存储平台做图床，使用绝对路径。
 
 ## 更新博客
 新建博文，其中 postName 是博文题目：
@@ -382,15 +460,32 @@ INFO  Deploy done: git
 hexo new "postName"  
 ```
 
-hexo会自动在博客目录 `source/_posts` 下生成 postName.md 文件。
+hexo 会自动在博客目录 `source/_posts` 下生成 postName.md 文件。
 
-每次修改更新本地博客源码文件后，需要在该路径键入 `hexo generate` 才能保存。再键入 `hexo deploy` 即可上传到 Github 上。如果 SSH 被禁用了，建议手动将 public 静态网站 push 到博客仓库上。
+每次修改更新本地博客源码文件后，需要针对该博客目录执行 `hexo generate` 重新（增量）编译；再键入 `hexo deploy` 即可上传到 Github 上。这两步也可合并为 `hexo d -g` ，先生成再部署。  
+如果 SSH 被禁用了，建议手动将 `public/` 目录下的静态网站 git push 到 GitHub Pages 博客仓库上。
 
 ## <!--以下是本文的脚注和超链接-->
-
-[Chrome's V8 JavaScript engine]:https://developers.google.com/v8/
+[nodejs-cn]:http://nodejs.cn/
+[Chrome V8]:https://developers.google.com/v8/
 [npm]:https://www.npmjs.com/
+[维基百科]:http://en.wikipedia.org/wiki/Nodejs
+[Node.js API]:http://nodeapi.ucdok.com/
+[Node.js 究竟是什么？]:http://www.ibm.com/developerworks/cn/opensource/os-nodejs/
+[为什么要用 Node.js ?]:http://blog.jobbole.com/53736/
+[使用 Node.js 的优势和劣势都有哪些？]:http://www.zhihu.com/question/19653241
+[谁在使用 Node.js ?]:https://github.com/nodejs/node-v0.x-archive/wiki/Projects,-Applications,-and-Companies-Using-Node
+[nodejs-en]:https://nodejs.org/
+[Homebrew]:http://brew.sh/index.html
+[Mac 上安装 Homebrew]:http://blog.csdn.net/delphiwcdj/article/details/19679891
+[使 OS X 更完整]:http://blog.csdn.net/aaawqqq/article/details/44088141
 [brew_install_write_permission_issue]:http://segmentfault.com/q/1010000000505091
+[RubyGems]:http://www.cnblogs.com/ihojin/p/ruby-gem-update-the-latest-version.html
+[NPM 的网站]:https:://npmjs.org/
+[Hexo]:https://hexo.io/
 [ls-tree-mac]:http://www.aikaiyuan.com/5413.html
+[fancybox]:http://doc.bropaul.com/fancyBox/
+[jquery 插件]:http://www.cnblogs.com/zhmt/archive/2011/10/06/2200152.html
+[丰富的弹出层效果]:http://www.helloweba.com/view-blog-65.html
 [hexo_resource]:https://hexo.io/zh-cn/docs/asset-folders.html
 [qiniu]:http://www.qiniu.com/
