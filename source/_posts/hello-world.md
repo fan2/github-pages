@@ -366,7 +366,7 @@ INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.
 ```
 
 在浏览器中输入 `http://localhost:4000` 即可访问只含欢迎页和默认主题的 hexo 博客了。  
-![hexo-hello_world](hexo-hello_world.png)
+![hexo-hello_world](http://7xo5uz.com1.z0.glb.clouddn.com/hexo-hello.png)
 
 按下 `Ctrl+C` 退出 hexo 服务器。
 
