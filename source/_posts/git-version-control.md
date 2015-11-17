@@ -4,7 +4,7 @@ categories: git
 tags: [git-init, git-add, git-commit, git-pull, git-push]
 ---
 
-之前梳理介绍过[subversion版本控制](http://blog.csdn.net/phunxm/article/details/40834427)，本文承接《[Mac下git通过SSH进行免密码安全连接github](http://blog.csdn.net/phunxm/article/details/45083335)》，基于一个初级的 git 版本控制流程贯串示例 git 日常操作，备忘查阅。
+之前梳理介绍过 [subversion 版本控制](http://blog.csdn.net/phunxm/article/details/40834427)，本文承接《[Mac下git通过SSH进行免密码安全连接github](http://blog.csdn.net/phunxm/article/details/45083335)》，结合具体操作实例贯串讲解 git 初级版本控制日常操作流程，备忘查阅。
 
 <!--more-->
 
@@ -13,7 +13,7 @@ tags: [git-init, git-add, git-commit, git-pull, git-push]
 
 ![google trends of github](http://img.blog.csdn.net/20150925231200247)
 
-## Mac/Xcode git
+## git for Mac/Xcode
 ### whereis git
 在 Mac Terminal 中执行 `which` 或 `whereis` 命令可以查看 git 的位置：
 
@@ -62,7 +62,7 @@ git-cvsserver              git-upload-archive
 1. 可在bash下运行 `setup git PATH for non-terminal programs.sh` 脚本设置新版 git 为非命令行程序的默认 git。  
 2. 可参照Mac下升级[subversion工具包升级方法](http://blog.csdn.net/phunxm/article/details/40834427)，直接软链新版binUtils的 git* 到`/Applications/Xcode.app/Contents/Developer/usr/bin`下即可。
 
-### git manual
+### git manual/help
 1. 输入 `git` 或 `git --help` 可以查看 git usage，一览 *most commonly used git commands* 要义：  
 	![git --help](http://img.blog.csdn.net/20150908072930624)  
 2. 针对具体 commands，可以求助“男人”（man），以下示例查看 **`git add`** 帮助的两种方式：
@@ -80,7 +80,8 @@ git-cvsserver              git-upload-archive
 按 `q` 键退出 manual。
 
 ## [git config](http://blog.csdn.net/wirelessqa/article/details/8572928)
-git配置分为系统级别、用户级别和项目级别，*`--global`* 选项指定用户级别的配置。
+git 配置分为系统级别、用户级别和项目级别，*`--global`* 选项指定用户级别的配置。  
+以下配置用户 user 信息：
 
 ```Shell
 ➜  ~  git config --global user.name fan2
@@ -88,10 +89,10 @@ git配置分为系统级别、用户级别和项目级别，*`--global`* 选项�
 ```
 
 配置完成后，可以输入 `git config --list` 命令查看当前配置。  
-该用户之后的 git 提交信息中将自动嵌入用户信息，即 **git log** 查看到的每条log的Author信息。  
-也可针对具体项目（cd 到 `.git` 所在目录）执行 **git config** 命令，而无需指定 `--system` 或 `--global` 选项，配置适用于独立项目的作者信息或代理信息（http.proxy）。
+之后的 git 提交信息中将自动嵌入用户信息，即 **git log** 查看到的每条 log 的 Author 信息。  
+也可针对具体项目（cd 到 `.git` 所在目录）执行 **git config** 命令，而无需指定 `--system` 或 `--global` 选项，配置适用于***独立项目***的作者信息或代理信息（http.proxy）。
 
-## git init
+## git init repository
 ### cd 进入本地项目目录
 
 ```Shell
@@ -388,7 +389,7 @@ index 717aedf..0a1832d 100644
 
 按 `q` 键退出 diff。
 
-关于 [git diff](http://www.gitguys.com/topics/git-diff/?lang=zh) 命令，可参考 [git diff](http://www.cnblogs.com/gbyukg/archive/2011/12/13/2286884.html) 和 [读懂 diff](http://www.ruanyifeng.com/blog/2012/08/how_to_read_diff.html)。
+以上也可使用 `git diff HEAD` 命令查看工作目录与 git 仓库之间的差异。
 
 再次执行 **`git status`** 命令查看当前本地仓库状态：
 
@@ -424,7 +425,46 @@ Changes to be committed:
 
 正常情况下，对于通过 <b>`git add`</b> 添加到暂存区的变更，需进一步执行 <b>`git commit`</b> 提交到本地git仓库。这两步操作也可糅合为 **`git commit -a`** 命令一步到位。`-a` 选项意即 `all` ，提交所有变更。
 
-若在 `git commit` 提交之前，想要放弃通过 `git add` 提交到暂存区中的修改（Unstaging a Staged File/Undo an Added new modification），可执行 `git reset HEAD <file>` 撤销提交到暂存中的修改：
+在 `git commit` 提交之前，可执行 `git diff --cached ` 命令查看索引区与 git 仓库之间的差异。
+
+#### git diff
+现在来总结一下使用频率较高的 `git diff` 命令：
+
+cmd               | ways to check diff
+------------------|---------------------------------
+`git diff`          | Changes in the working tree not yet staged for the next commit
+`git diff --cached` | Changes between the index and your last commit; what you would be committing if you run "git commit" without "-a" option. <br/>`--staged` is a synonym of `--cached`.
+`git diff HEAD`     | Changes in the working tree since your last commit; what you would be committing if you run "git commit -a"<br/>`git diff HEAD^`：比较上次提交；<br/>`git diff HEAD^ HEAD`：Compare the version before the last commit and the last commit. <br/>`git diff HEAD~2`：比较上2次提交。
+
+关于 [git diff](http://www.gitguys.com/topics/git-diff/?lang=zh) 命令，可参考 [git diff](http://www.cnblogs.com/gbyukg/archive/2011/12/13/2286884.html) 和 [读懂 diff](http://www.ruanyifeng.com/blog/2012/08/how_to_read_diff.html)。
+
+使用 `git diff` 命令时，也可指定 difftool：
+
+```
+➜  test git:(master) ✗ git difftool 
+
+This message is displayed because 'diff.tool' is not configured.
+See 'git difftool --tool-help' or 'git help config' for more details.
+'git difftool' will now attempt to use one of the following tools:
+opendiff kdiff3 tkdiff xxdiff meld kompare gvimdiff diffuse diffmerge ecmerge p4merge araxis bc codecompare emerge vimdiff
+
+Viewing (1/1): 'README.md'
+Launch 'opendiff' [Y/n]: 
+```
+
+配置 `vimdiff` 作为 git difftool：
+
+```Shell
+git config --global diff.tool vimdiff` 
+```
+
+[AraxisMerge和 Beyond Compare 做 git mergetool 配置](http://www.cnblogs.com/kangyi/p/4827078.html)  
+[Git 集成 Araxis Merge 作为比较和合并 GUI 工具的配置](http://blog.csdn.net/snowdream86/article/details/8807397)  
+[Using Araxis Merge with Git](https://lautaportti.wordpress.com/2009/02/11/using-araxis-merge-with-git/)  
+[how-do-i-configure-araxis-merge-for-use-with-git](http://stackoverflow.com/questions/14593817/how-do-i-configure-araxis-merge-for-use-with-git)
+
+#### git reset HEAD
+若想放弃通过 `git add` 提交到暂存区中的修改（Unstaging a Staged File/Undo an Added new modification），可执行 `git reset HEAD <file>` 撤销提交到暂存中的修改：
 
 ```Shell
 ➜  resizableImageWithCapInsets git:(master) ✗ git reset HEAD README.md  
@@ -432,7 +472,7 @@ Unstaged changes after reset:
 M	README.md  
 ```
 
-执行 `git reset HEAD` 后，Index/Staging Area 中记录的 README.md 文件恢复恢复到上次commit 完 local repository 中的 HEAD 文件记录。Working tree中 README.md 文件的状态则恢复为 modified（Changes Unstaged relative to index），可再次执行 `git status` 查看最新状态。可以继续编辑 README.md 再适时提交。
+执行 `git reset HEAD` 后，Index/Staging Area 中记录的 README.md 文件恢复恢复到上次commit 完 local repository 中的 HEAD 文件记录。Working tree中 README.md 文件的状态则恢复为 modified（Changes Unstaged relative to index），可执行 `git status` 查看最新状态。可以继续编辑 README.md 再适时提交。
 
 ### 删除文件
 将 README.md 文件添加到 git 版本控制并且提交到 git 仓库后，，可以使用 `git rm` 命令删除本地 git 仓库中的 tracked/versioned 文件：
@@ -616,7 +656,7 @@ OPTIONS
 ## git rebase from remote ( pull = fetch + merge)
 当本地仓库跟踪的远程仓库发生变更时，需要rebase（merge from remote to local）。
 
-###fetch + merge
+### fetch + merge
 
 + `git fetch` 取得两个版本的差异：
 
