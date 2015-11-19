@@ -449,10 +449,6 @@ INFO  Deploy done: git
 1. 部署会覆盖掉你之前在版本库 `fan2.github.io` 中存放的文件。  
 2. `hexo deploy` 时将在博客根目录下生成 `.deploy_git` 文件夹，下一次 `hexo deploy` 将会基于 diff 提交差异量。
 
-## 图片存储
-在 `source` 下建立与博客 `blog.md` 同名的目录 `blog` ，用于存放图片等资源文件，首页相对引用成功；但点击进入文章，相对引用失败！  
-可参照 [hexo 资源文件夹][hexo_resource] ，看看如何设置 asset 相对路径。也可采用[七牛][qiniu]等云存储平台做图床，使用绝对路径。
-
 ## 更新博客
 新建博文，其中 postName 是博文题目：
 
@@ -464,6 +460,156 @@ hexo 会自动在博客目录 `source/_posts` 下生成 postName.md 文件。
 
 每次修改更新本地博客源码文件后，需要针对该博客目录执行 `hexo generate` 重新（增量）编译；再键入 `hexo deploy` 即可上传到 Github 上。这两步也可合并为 `hexo d -g` ，先生成再部署。  
 如果 SSH 被禁用了，建议手动将 `public/` 目录下的静态网站 git push 到 GitHub Pages 博客仓库上。
+
+## 图片存储
+在 `source` 下建立与博客 `blog.md` 同名的目录 `blog` ，用于存放图片等资源文件，首页相对引用成功；但点击进入文章，相对引用失败！  
+可参照 [hexo 资源文件夹][hexo_resource] ，看看如何设置 asset 相对路径。也可采用[七牛][qiniu]等云存储平台做图床，使用绝对路径。
+
+## 404
+推荐使用[腾讯公益404][]。
+
+新建 source/404.html，在 `<body>` 部分嵌入腾讯公益404的 js 代码：
+
+```html
+---
+layout: default
+---
+<html>
+    <head>
+         <meta charset="UTF-8" />
+         <title>404</title>                                                                                                                                        
+    </head>
+    <body>
+         <script type="text/javascript" src="http://www.qq.com/404/search_children.js" charset="utf-8" homePageUrl="http://col.dog/" homePageName="返回 col.dog 主页"></script>
+    </body>
+</html>
+```
+
+修改“homePageUrl”、“homePageName”这两个参数即可定制返回链接。  
+重新生成部署，即可在访问本站不存在的页面（资源）时显示腾讯公益404页面。
+
+## 配置主题——Next
+在终端 cd 到博客站点目录 `Projects/git/blog/theme` 下，git clone 下载 NEXT 主题到本地：
+
+```Shell
+➜  blog  git clone https://github.com/iissnan/hexo-theme-next
+```
+
+### 配置菜单
+编辑 `themes/next/_config.yml` 里面的 menu 项，配置顶部菜单：
+
+```yml
+menu:
+  home: /
+  archives: /archives
+  categories: /categories
+  tags: /tags
+  # commonweal: /404.html
+  about: /about
+```
+
+1. home: /，首页为根目录，点击将显示 index.html 。
+2. archives: /archives，归档，点击将显示文章列表。
+3. categories: /categories，分类，点击将显示文章分类。
+4. tags: /tags，标签，点击将显示文章标签。
+5. about: /about，关于，介绍一下自己。
+
+### [创建分类页面][]
+默认访问 Tags/Categories，会显示 404，找不到页面。
+
+### [创建标签页面][]
+默认访问 Tags/Categories，会显示 404，找不到页面。
+
+### [创建“关于我”页面][]
+Hexo默认不生成 About 页面，有需要的话可以创建一个叫 about 的 page，然后再添加到菜单项。
+
+在命令行里面输入：
+
+```Shell
+hexo new page "about"
+```
+
+然后，你会发现 source 里面多了个 about 目录，里面有个 index.md。其实你也可以手动建立，页面的格式和文章一样。
+
+## [添加多说评论][]
+使用社交账号登录 多说 网站，创建一个站点。具体步骤如下：
+
+1. 登录后在首页选择 “我要安装”。
+2. 创建站点，填写站点相关信息。注意，**多说域名** 这一栏填写的即是你的 duoshuo_shortname。
+3. 编辑主题的 _config.yml 配置文件，注意，不是站点的_config.yml文件 ，添加 duoshuo_shortname 字段，设置如下：
+
+```yml
+duoshuo_shortname: your-duoshuo-shortname
+```
+
+**注意：**
+
+> duoshuo short name: 你的多说二级域名为去掉 `.duoshuo.com` 的前缀部分。
+
+## 添加统计
+### [hexo/next 添加 Google/百度 统计][]
+
+添加 Google 或者 百度 的统计 ID 即可开启网站统计。
+
+编辑 Next 主题的 _config.yml ，新增字段 google_analytics 或者 baidu_analytics（取决于使用的统计系统）
+
+```yml
+google_analytics: your-analytics-id
+baidu_analytics: your-analytics-id
+```
+
+#### Google Search Console
+在 [Google Search Console][] 上注册自己的站点，验证身份后可以提交站点地图文件（sitemap.xml），有助于 Google 更好地决定如何抓取您的网站，进而提高博客站点在搜索结果中的曝光率。
+
+### hexo/next 添加 腾讯分析
+#### 为自己的站点申请腾讯分析 ID
+1.进入 [腾讯分析首页][]，使用 QQ 账号登陆。
+2.登录后，进入 [腾讯分析欢迎页][] ，提示“您还没有注册站点，请先添加您的站点”，需要在编辑框中输入域名或二级域名，这里添加 `col.dog`。
+3.请将下列代码添加至网站代码 `</body>` 前。
+
+```html
+<script type="text/javascript" src="http://tajs.qq.com/stats?sId=$your_ta_sid" charset="UTF-8"></script>
+```
+
+其中 `$your_ta_sid` 为腾讯分析为你注册的网站分配的 ID。
+
+**注意：**
+
+> 框架式网站请在框架集页面和子框架页面均安装统计代码，框架集页面请安装在 `</head>` 前。
+
+#### 将自己的站点接入腾讯分析
+1.在目录 `/themes/next/layout/_scripts/analytics/` 下新建 `tencent-analytics.swig` 文件，内容如下：
+
+```swig
+{% if theme.tencent_analytics %}
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//tajs.qq.com/stats?sId={{ theme.tencent_analytics }}";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+{% endif %}
+```
+
+以上代码的意思是，如果 theme 配置了 `tencent_analytics` ID，则添加腾讯分析的 `<script>` 代码。
+
+2.打开 `/themes/next/layout/_scripts/analytics.swig` 文件，在末尾添加包含 `tencent-analytics.swig` 文件：
+
+```swig
+{% include 'analytics/tencent-analytics.swig' %}
+```
+
+3.打开 `/themes/next/_config.yml` 文件，在其中增加配置字段 `tencent_analytics`，其值为 `your_ta_sid`。
+
+```yml
+tencent_analytics: $your_ta_sid
+```
+
+4.重新生成部署网站，则可接入腾讯分析。
+在 腾讯分析 网站的个人站点列表中可以浏览网站概况，其中列出了 今日浏览量（PV）、今日独立IP、今日用户量（UV） 等统计分析指标。
 
 ## <!--以下是本文的脚注和超链接-->
 [nodejs-cn]:http://nodejs.cn/
@@ -489,3 +635,12 @@ hexo 会自动在博客目录 `source/_posts` 下生成 postName.md 文件。
 [丰富的弹出层效果]:http://www.helloweba.com/view-blog-65.html
 [hexo_resource]:https://hexo.io/zh-cn/docs/asset-folders.html
 [qiniu]:http://www.qiniu.com/
+[腾讯公益404]:http://www.qq.com/404/
+[创建分类页面]:https://github.com/iissnan/hexo-theme-next/wiki/%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2
+[创建标签页面]:https://github.com/iissnan/hexo-theme-next/wiki/%E5%88%9B%E5%BB%BA%E5%88%86%E7%B1%BB%E9%A1%B5%E9%9D%A2
+[创建“关于我”页面]:https://github.com/iissnan/hexo-theme-next/wiki/%E5%88%9B%E5%BB%BA-%22%E5%85%B3%E4%BA%8E%E6%88%91%22-%E9%A1%B5%E9%9D%A2
+[添加多说评论]:https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E7%BD%AE%E5%A4%9A%E8%AF%B4-DISQUS
+[hexo/next 添加 Google/百度 统计]:https://github.com/iissnan/hexo-theme-next/wiki/%E6%B7%BB%E5%8A%A0-Google---%E7%99%BE%E5%BA%A6-%E7%BB%9F%E8%AE%A1
+[Google Search Console]:https://www.google.com/webmasters/tools/home?hl=zh-CN
+[腾讯分析首页]:http://v2.ta.qq.com/analysis/index
+[腾讯分析欢迎页]:http://v2.ta.qq.com/bind/site
