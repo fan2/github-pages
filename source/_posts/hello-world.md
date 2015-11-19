@@ -187,12 +187,12 @@ or you can check the docs: http://hexo.io/docs/
 
 **常用的 hexo 命令：**
 
-- hexo init `<blog>` ：
-- hexo n == hexo new
-- hexo g == hexo generate
-- hexo d == hexo deploy
-- hexo s == hexo server
-- hexo clean
+- hexo init `<blog>` ：初始化 hexo 博客模板。
+- hexo n == hexo new：新建文章或页面。
+- hexo g == hexo generate：编译生成网站。
+- hexo d == hexo deploy：发布网站。
+- hexo s == hexo server：启动服务器。
+- hexo clean：清理 cache。
 
 **hexo 在线帮助文档：**
 
@@ -371,8 +371,8 @@ INFO  Hexo is running at http://0.0.0.0:4000/. Press Ctrl+C to stop.
 按下 `Ctrl+C` 退出 hexo 服务器。
 
 ## hexo deploy
-### 配置 Deployment 
-修改 `_config.yml` 文件里面的 Deployment 发布配置。  
+### 配置 Deployment
+编辑站点配置文件(`/_config.yml`)里面的 Deployment 发布配置。  
 其中 deploy type 修改为 `github`；repository 修改为自己在 Github 上的 User Pages 的地址：`https://github.com/fan2/fan2.github.io.git` 。
 
 ```yml
@@ -406,8 +406,8 @@ ERROR Deployer not found: github
 
 **解决方案：**
 
-1. [将 `github` 修改为 `git`](http://www.v2ex.com/t/175940)， 还是报错；
-2. [安装 `hexo-deployer-git`](http://blog.163.com/gis_warrior/blog/static/19361717320153100184696/):
+1. [将 github 修改为 git][]， 还是报错；
+2. [安装 hexo-deployer-git][]:
 
 ```Shell
 ➜  blog npm install hexo-deployer-git --save
@@ -458,6 +458,17 @@ hexo new "postName"
 
 hexo 会自动在博客目录 `source/_posts` 下生成 postName.md 文件。
 
+markdown 文件开头的 **front-matter** 属性（ `---` 上面的区域）中可以定义文章的属性，便于 hexo 主题模板生成格式化的文章。以下是《git 版本控制》这篇博文的 front-matter，其中定义了标题、日期、所属分类和标签：
+
+```markdown
+title: git 版本控制
+date: 2015-11-17 07:13:23
+categories: git
+tags: [git-init, git-add, git-commit, git-pull, git-push]
+---
+```
+
+---
 每次修改更新本地博客源码文件后，需要针对该博客目录执行 `hexo generate` 重新（增量）编译；再键入 `hexo deploy` 即可上传到 Github 上。这两步也可合并为 `hexo d -g` ，先生成再部署。  
 如果 SSH 被禁用了，建议手动将 `public/` 目录下的静态网站 git push 到 GitHub Pages 博客仓库上。
 
@@ -488,23 +499,36 @@ layout: default
 修改“homePageUrl”、“homePageName”这两个参数即可定制返回链接。  
 重新生成部署，即可在访问本站不存在的页面（资源）时显示腾讯公益404页面。
 
-## 配置主题——Next
+## 配置主题——[Next][]
 在终端 cd 到博客站点目录 `Projects/git/blog/theme` 下，git clone 下载 NEXT 主题到本地目录 `themes/next` 下：
 
 ```Shell
 ➜  blog  git clone https://github.com/iissnan/hexo-theme-next themes/next
 ```
 
-编辑站点的 `_config.yml` 文件，将主题从默认的 landscape 切换为 next：
+编辑站点配置文件，将字体从繁体切换为简体、将主题从默认的 landscape 切换为 next：
 
 ```yml
+# Site
+language: zh-Hans #zh-hk
+
+# Extensions
+## Themes: http://hexo.io/themes/
 theme: next # landscape
 ```
 
 重新生成部署网站，将按 next 主题风格排版布局站点。
 
+### 开启 Mist
+编辑主题配置文件(`/themes/next/_config.yml`) ，开启 NexT.Mist 风格主题：
+
+```yml
+# Schemes
+scheme: Mist
+```
+
 ### 配置菜单
-编辑 `themes/next/_config.yml` 里面的 menu 项，配置顶部菜单：
+编辑主题配置文件里面的 menu 项，配置顶部菜单：
 
 ```yml
 menu:
@@ -516,17 +540,57 @@ menu:
   about: /about
 ```
 
-1. home: /，首页为根目录，点击将显示 index.html 。
-2. archives: /archives，归档，点击将显示文章列表。
-3. categories: /categories，分类，点击将显示文章分类。
-4. tags: /tags，标签，点击将显示文章标签。
-5. about: /about，关于，介绍一下自己。
+1. home: /，**首页**，点击将显示根目录 /index.html 。
+2. archives: /archives，**归档**，点击将显示文章列表。
+3. categories: /categories，**分类**，点击将显示文章分类。
+4. tags: /tags，**标签**，点击将显示文章标签。
+5. about: /about，**关于**，介绍一下自己。
 
 ### [创建分类页面][]
-默认访问 Tags/Categories，会显示 404，找不到页面。
+默认点击访问 分类(Categories) 链接，将会提示 404，找不到页面。
+
+1. 新建一个页面，命名为 categories 。命令如下：
+
+```Shell
+hexo new page categories
+```
+
+2. 编辑刚才新建的页面(`/source/categories/index.md`)，将页面的类型（type）设置为 categories ，主题框架模板将自动在这个页面显示所有分类。
+
+在该 markdown 文件中，只需要定义文章开头的 **front-matter** 属性（文件最上方以 `---` 分隔的区域），正文为空:
+
+```markdown
+title: 分类
+type: "categories"
+comments: false
+---
+```
+
+重新生成部署生效。
+
+**注意：**
+
+> 下文有启用 多说 或者 Disqus 评论，模板生成的分类页面也会带有评论。这里添加字段 comments ，并将值设置为 false ，关闭分类页面的评论。
 
 ### [创建标签页面][]
-默认访问 Tags/Categories，会显示 404，找不到页面。
+默认点击访问 分类(Tags) 链接，将会提示 404，找不到页面。
+
+1. 新建一个页面，命名为 tags 。命令如下：
+
+```Shell
+hexo new page tags
+```
+
+2. 编辑刚才新建的页面(`/source/tags/index.md`)，将页面的类型（type）设置为 tags ，主题框架模板将自动在这个页面显示所有分类。
+
+```markdown
+title: 标签
+type: "tags"
+comments: false
+---
+```
+
+标签页面也关闭了评论，重新生成部署生效。
 
 ### [创建“关于我”页面][]
 Hexo默认不生成 About 页面，有需要的话可以创建一个叫 about 的 page，然后再添加到菜单项。
@@ -537,14 +601,14 @@ Hexo默认不生成 About 页面，有需要的话可以创建一个叫 about �
 hexo new page "about"
 ```
 
-然后，你会发现 source 里面多了个 about 目录，里面有个 index.md。其实你也可以手动建立，页面的格式和文章一样。
+然后，你会发现 source 里面多了个 about 目录，里面有个 index.md。其实你也可以手动建立 markdown 文件，页面的格式和文章一样。
 
 ## [添加多说评论][]
 使用社交账号登录 多说 网站，创建一个站点。具体步骤如下：
 
 1. 登录后在首页选择 “我要安装”。
 2. 创建站点，填写站点相关信息。注意，**多说域名** 这一栏填写的即是你的 duoshuo_shortname。
-3. 编辑主题的 _config.yml 配置文件，注意，不是站点的_config.yml文件 ，添加 duoshuo_shortname 字段，设置如下：
+3. 编辑主题配置文件，添加 duoshuo_shortname 字段，设置如下：
 
 ```yml
 duoshuo_shortname: your-duoshuo-shortname
@@ -559,7 +623,7 @@ duoshuo_shortname: your-duoshuo-shortname
 
 添加 Google 或者 百度 的统计 ID 即可开启网站统计。
 
-编辑 Next 主题的 _config.yml ，新增字段 google_analytics 或者 baidu_analytics（取决于使用的统计系统）
+编辑主题配置文件 ，新增字段 google_analytics 或者 baidu_analytics（取决于使用的统计系统）
 
 ```yml
 google_analytics: your-analytics-id
@@ -567,13 +631,13 @@ baidu_analytics: your-analytics-id
 ```
 
 #### Google Search Console
-在 [Google Search Console][] 上注册自己的站点，验证身份后可以提交站点地图文件（sitemap.xml），有助于 Google 更好地决定如何抓取您的网站，进而提高博客站点在搜索结果中的曝光率。
+在 [Google Search Console][] 上注册自己的站点，验证身份（google_site_verification）后可以提交站点地图文件（sitemap.xml），这有助于 Google 更好地决定如何抓取您的网站，进而提高博客站点在搜索结果中的曝光率。
 
 ### hexo/next 添加 腾讯分析
 #### 为自己的站点申请腾讯分析 ID
 1.进入 [腾讯分析首页][]，使用 QQ 账号登陆。
 2.登录后，进入 [腾讯分析欢迎页][] ，提示“您还没有注册站点，请先添加您的站点”，需要在编辑框中输入域名或二级域名，这里添加 `col.dog`。
-3.请将下列代码添加至网站代码 `</body>` 前。
+3.请将下列代码添加至网站代码 `</body>` 前（参见下一节的安装说明）。
 
 ```html
 <script type="text/javascript" src="http://tajs.qq.com/stats?sId=$your_ta_sid" charset="UTF-8"></script>
@@ -602,7 +666,7 @@ baidu_analytics: your-analytics-id
 {% endif %}
 ```
 
-以上代码的意思是，如果 theme 配置了 `tencent_analytics` ID，则添加腾讯分析的 `<script>` 代码。
+以上代码的意思是，如果 theme 配置了 `tencent_analytics` ID，则添加腾讯分析的 `<script>` 统计代码。
 
 2.打开 `/themes/next/layout/_scripts/analytics.swig` 文件，在末尾添加包含 `tencent-analytics.swig` 文件：
 
@@ -610,16 +674,20 @@ baidu_analytics: your-analytics-id
 {% include 'analytics/tencent-analytics.swig' %}
 ```
 
-3.打开 `/themes/next/_config.yml` 文件，在其中增加配置字段 `tencent_analytics`，其值为 `your_ta_sid`。
+3.打开主题配置文件，新增配置字段 `tencent_analytics`，设置其值为 `your_ta_sid`。
 
 ```yml
 tencent_analytics: $your_ta_sid
 ```
 
 4.重新生成部署网站，则可接入腾讯分析。
-在 腾讯分析 网站的个人站点列表中可以浏览网站概况，其中列出了 今日浏览量（PV）、今日独立IP、今日用户量（UV） 等统计分析指标。
+
+在 腾讯分析 网站的个人站点列表中可以浏览网站概况，其中列出了 **今日浏览量（PV）**、**今日独立 IP**、**今日用户量（UV）** 等统计分析指标。
 
 ## <!--以下是本文的脚注和超链接-->
+
+<!-- ## 安装 Node.js + NPM -->
+
 [nodejs-cn]:http://nodejs.cn/
 [Chrome V8]:https://developers.google.com/v8/
 [npm]:https://www.npmjs.com/
@@ -637,17 +705,44 @@ tencent_analytics: $your_ta_sid
 [RubyGems]:http://www.cnblogs.com/ihojin/p/ruby-gem-update-the-latest-version.html
 [NPM 的网站]:https:://npmjs.org/
 [Hexo]:https://hexo.io/
+
+<!-- ## hexo init -->
+
 [ls-tree-mac]:http://www.aikaiyuan.com/5413.html
+
+<!-- ## hexo generate -->
+
 [fancybox]:http://doc.bropaul.com/fancyBox/
 [jquery 插件]:http://www.cnblogs.com/zhmt/archive/2011/10/06/2200152.html
 [丰富的弹出层效果]:http://www.helloweba.com/view-blog-65.html
+
+<!-- ## hexo deploy -->
+
+[将 github 修改为 git]:http://www.v2ex.com/t/175940
+[安装 hexo-deployer-git]:http://blog.163.com/gis_warrior/blog/static/19361717320153100184696/
+
+<!-- ## 图片存储 -->
+
 [hexo_resource]:https://hexo.io/zh-cn/docs/asset-folders.html
 [qiniu]:http://www.qiniu.com/
+
+<!-- ## 404 -->
+
 [腾讯公益404]:http://www.qq.com/404/
+
+<!-- ## 配置主题 -->
+
+[Next]:https://github.com/iissnan/hexo-theme-next
 [创建分类页面]:https://github.com/iissnan/hexo-theme-next/wiki/%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE%E4%BA%91%E9%A1%B5%E9%9D%A2
 [创建标签页面]:https://github.com/iissnan/hexo-theme-next/wiki/%E5%88%9B%E5%BB%BA%E5%88%86%E7%B1%BB%E9%A1%B5%E9%9D%A2
 [创建“关于我”页面]:https://github.com/iissnan/hexo-theme-next/wiki/%E5%88%9B%E5%BB%BA-%22%E5%85%B3%E4%BA%8E%E6%88%91%22-%E9%A1%B5%E9%9D%A2
+
+<!-- ## 添加多说评论 -->
+
 [添加多说评论]:https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E7%BD%AE%E5%A4%9A%E8%AF%B4-DISQUS
+
+<!-- ## 添加统计 -->
+
 [hexo/next 添加 Google/百度 统计]:https://github.com/iissnan/hexo-theme-next/wiki/%E6%B7%BB%E5%8A%A0-Google---%E7%99%BE%E5%BA%A6-%E7%BB%9F%E8%AE%A1
 [Google Search Console]:https://www.google.com/webmasters/tools/home?hl=zh-CN
 [腾讯分析首页]:http://v2.ta.qq.com/analysis/index
