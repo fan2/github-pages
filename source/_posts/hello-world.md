@@ -489,10 +489,10 @@ layout: default
 重新生成部署，即可在访问本站不存在的页面（资源）时显示腾讯公益404页面。
 
 ## 配置主题——Next
-在终端 cd 到博客站点目录 `Projects/git/blog/theme` 下，git clone 下载 NEXT 主题到本地目录 `theme/next` 下：
+在终端 cd 到博客站点目录 `Projects/git/blog/theme` 下，git clone 下载 NEXT 主题到本地目录 `themes/next` 下：
 
 ```Shell
-➜  blog  git clone https://github.com/iissnan/hexo-theme-next theme/next
+➜  blog  git clone https://github.com/iissnan/hexo-theme-next themes/next
 ```
 
 编辑站点的 `_config.yml` 文件，将主题从默认的 landscape 切换为 next：
