@@ -865,13 +865,14 @@ sitemap:
 
 [添加 RSS/Feed]:https://github.com/xiangming/landscape-plus/issues/31
 [hexo-generator-feed]:https://github.com/hexojs/hexo-generator-feed
-[ATOM XML 聚合]:http://www.w4s.cn/feed/atom
+[Atom XML 聚合]:http://www.w4s.cn/feed/atom
 [显示 feed 链接]:https://github.com/iissnan/hexo-theme-next/wiki/%E6%98%BE%E7%A4%BA-feed-%E9%93%BE%E6%8E%A5
 
-<!-- ## 添加统计 -->
+<!-- ## 添加统计分析 -->
 
 [hexo/next 添加 Google/百度 统计]:https://github.com/iissnan/hexo-theme-next/wiki/%E6%B7%BB%E5%8A%A0-Google---%E7%99%BE%E5%BA%A6-%E7%BB%9F%E8%AE%A1
-[Google Search Console]:https://www.google.com/webmasters/tools/home?hl=zh-CN
+[Google-Analytics]:https://www.google.com/analytics/
+[Baidu-Analytics]:http://tongji.baidu.com/
 [腾讯分析首页]:http://v2.ta.qq.com/analysis/index
 [腾讯分析欢迎页]:http://v2.ta.qq.com/bind/site
 
@@ -879,3 +880,4 @@ sitemap:
 
 [促进博客的分享推广]:http://aaronyee.com/blog/2015/06/14/blog-open.html
 [hexo-generator-sitemap]:https://github.com/hexojs/hexo-generator-sitemap
+[Google Search Console]:https://www.google.com/webmasters/tools/home?hl=zh-CN
