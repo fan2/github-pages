@@ -1,7 +1,14 @@
 title: 基于 Hexo 和 GitHub Pages 搭建博客
 date: 2015-11-12 19:27:00
 categories: Hexo
-tags: 博客志
+tags:
+- node.js
+- npm
+- hexo
+- next
+- feed
+- analytics
+- sitemap
 ---
 
 本文详细记录了从安装 node.js / Hexo 到 使用 hexo 发布 markdown 格式的博客并托管到 GitHub 的全过程。
@@ -450,7 +457,7 @@ INFO  Deploy done: git
 1. 部署会覆盖掉你之前在版本库 `fan2.github.io` 中存放的文件。  
 2. `hexo deploy` 时将在博客根目录下生成 `.deploy_git` 文件夹，下一次 `hexo deploy` 将会基于 diff 提交差异量。
 
-## 更新博客
+## 写新文章，更新博客
 新建博文，其中 postName 是博文题目：
 
 ```Shell
@@ -459,7 +466,26 @@ hexo new "postName"
 
 hexo 会自动在博客目录 `source/_posts` 下生成 postName.md 文件。
 
-markdown 文件开头的 **front-matter** 属性（ `---` 上面的区域）中可以定义文章的属性，便于 hexo 主题模板生成格式化的文章。以下是《git 版本控制》这篇博文的 front-matter，其中定义了标题、日期、所属分类和标签：
+### front-matter
+markdown 文件开头的 **front-matter** 属性（ `---` 上面的区域）中可以定义文章的属性，便于 hexo 主题模板生成格式化的文章。
+
+以下是本文的 front-matter，其中定义了标题、日期、所属分类和多标签：
+
+```
+title: 基于 Hexo 和 GitHub Pages 搭建博客
+date: 2015-11-12 19:27:00
+categories: Hexo
+tags:
+- node.js
+- npm
+- hexo
+- next
+- feed
+- analytics
+- sitemap
+```
+
+以下是下一篇博文《git 版本控制》的 front-matter，其中定义了标题、日期、所属分类和多标签：
 
 ```markdown
 title: git 版本控制
@@ -469,7 +495,7 @@ tags: [git-init, git-add, git-commit, git-pull, git-push]
 ---
 ```
 
----
+### 重新生成部署
 每次修改更新本地博客源码文件后，需要针对该博客目录执行 `hexo generate` 重新（增量）编译；再键入 `hexo deploy` 即可上传到 Github 上。这两步也可合并为 `hexo d -g` ，先生成再部署。  
 如果 SSH 被禁用了，建议手动将 `public/` 目录下的静态网站 git push 到 GitHub Pages 博客仓库上。
 
@@ -591,7 +617,8 @@ comments: false
 ---
 ```
 
-标签页面也关闭了评论，重新生成部署生效。
+- 标签页面也关闭了评论，重新生成部署生效。
+- 多标签的两种书写格式参照 **front-matter** 章节。
 
 ### [创建“关于我”页面][]
 Hexo默认不生成 About 页面，有需要的话可以创建一个叫 about 的 page，然后再添加到菜单项。
