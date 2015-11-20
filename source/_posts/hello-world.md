@@ -114,8 +114,9 @@ Config info can be viewed via: npm help config
 npm@2.14.7 /usr/local/lib/node_modules/npm
 ```
 
-执行 `npm -l` 命令可查看帮助详情。  
-下文将通过 `npm install <pkg>` 命令来安装快速、简洁且高效的博客框架——[Hexo][]，并基于 GitPages 托管来搭建免费开源博客。
+执行 `npm -l` 命令可查看帮助详情。
+
+下文将通过 `npm install <pkg>` 命令来安装快速、简洁且高效的[静态博客框架][] —— [Hexo][]，并基于 GitPages 托管来搭建免费开源博客。
 
 ## NPM 安装 hexo
 ### npm install hexo
@@ -604,7 +605,7 @@ hexo new page "about"
 然后，你会发现 source 里面多了个 about 目录，里面有个 index.md。其实你也可以手动建立 markdown 文件，页面的格式和文章一样。
 
 ## [添加多说评论][]
-使用社交账号登录 多说 网站，创建一个站点。具体步骤如下：
+使用社交账号登录 [多说][] 网站，创建一个站点。具体步骤如下：
 
 1. 登录后在首页选择 “我要安装”。
 2. 创建站点，填写站点相关信息。注意，**多说域名** 这一栏填写的即是你的 duoshuo_shortname。
@@ -684,6 +685,31 @@ tencent_analytics: $your_ta_sid
 
 在 腾讯分析 网站的个人站点列表中可以浏览网站概况，其中列出了 **今日浏览量（PV）**、**今日独立 IP**、**今日用户量（UV）** 等统计分析指标。
 
+## 参考
+[Hexo 系列攻略](http://ijiaober.github.io/categories/hexo/)  
+[Hexo 系列教程](http://zipperary.com/categories/hexo/)  
+[hexo 你的博客](http://ibruce.info/2013/11/22/hexo-your-blog/)
+
+[Hexo github 独立博客](http://cnfeat.com/blog/2014/05/10/how-to-build-a-blog/)  
+[创建GitHub技术博客全攻略](http://blog.csdn.net/renfufei/article/details/37725057/)
+
+[用 HEXO 搭建个人博客](http://andy-yao.me/2015/05/06/blog-with-hexo/)  
+[搭建你自己的 Hexo 博客](http://blog.newbmiao.com/2015/06/16/hexo-on-your-github.html)  
+[简明 Github Pages 与 Hexo 教程](http://blog.csdn.net/poem_of_sunshine/article/details/29369785/)
+
+[Hexo 3.0 静态博客使用指南](http://segmentfault.com/a/1190000002592993)  
+[Hexo 搭建 Github 静态博客](http://www.cnblogs.com/zhcncn/p/4097881.html)  
+[Hexo 免费静态博客安装和使用方法](http://www.freehao123.com/hexo-node-js/)  
+[Hexo 在 github 上构建免费的 Web 应用](http://blog.fens.me/hexo-blog-github/)
+
+[hexo 主题优化](http://www.voidking.com/2015/05/31/deve-hexo-theme-optimize/)  
+[Hexo 博客优化](http://www.bubuko.com/infodetail-618287.html)  
+[hexo 的私人订制](http://blog.sunnyxx.com/2014/03/07/hexo_customize/)  
+[Hexo 优化与定制](http://lukang.me/categories/Hexo/)
+
+[关于 Hexo 的若干问题](http://bubkoo.com/2013/12/16/hexo-issure/)  
+[Hexo常见问题解决方案](https://xuanwo.org/2014/08/14/hexo-usual-problem/#Hexo3-0%E4%BB%A5%E4%B8%8A%E6%94%AF%E6%8C%81)
+
 ## <!--以下是本文的脚注和超链接-->
 
 <!-- ## 安装 Node.js + NPM -->
@@ -704,6 +730,7 @@ tencent_analytics: $your_ta_sid
 [brew_install_write_permission_issue]:http://segmentfault.com/q/1010000000505091
 [RubyGems]:http://www.cnblogs.com/ihojin/p/ruby-gem-update-the-latest-version.html
 [NPM 的网站]:https:://npmjs.org/
+[静态博客框架]:http://code.csdn.net/news/2819909
 [Hexo]:https://hexo.io/
 
 <!-- ## hexo init -->
@@ -740,6 +767,7 @@ tencent_analytics: $your_ta_sid
 <!-- ## 添加多说评论 -->
 
 [添加多说评论]:https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E7%BD%AE%E5%A4%9A%E8%AF%B4-DISQUS
+[多说]:http://dev.duoshuo.com/threads/541d3b2b40b5abcd2e4df0e9
 
 <!-- ## 添加统计 -->
 
