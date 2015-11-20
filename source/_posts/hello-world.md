@@ -646,20 +646,54 @@ duoshuo_shortname: your-duoshuo-shortname
 
 > duoshuo short name: 你的多说二级域名为去掉 `.duoshuo.com` 的前缀部分。
 
-## 添加统计
+## [添加 RSS/Feed][]
+很多新闻网站和 CMS 都会生成 atom 格式的 xml 文件（atom.xml），以供 RSS 订阅软件或聚合网站读取。这个在前几年是一种主流的新闻分享方式，聚合网站通过远程读取 atom 文件的内容，将内容通过指定的格式输出在网站上，以供大家浏览。
+
+1.在命令行终端中，通过 npm 来安装 [hexo-generator-feed][] 插件：
+
+```Shell
+➜  github-pages git:(master) ✗ npm install hexo-generator-feed --save
+hexo-generator-feed@1.0.3 node_modules/hexo-generator-feed
+├── object-assign@3.0.0
+└── ejs@1.0.0
+```
+
+2.在站点配置文件中加载 hexo-generator-feed 插件：
+
+```yml
+Plugins:
+- hexo-generator-feed
+```
+
+3.在站点配置文件中配置 [Atom XML 聚合][] 格式的 feed：
+
+```yml
+#Feed Atom
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+```
+
+主题配置文件中的 `rss` 字段的值保持为空，以便[显示 feed 链接][]。  
+重新编译网站，将在 `public` 目录下生成 `atom.xml` 文件。用户点击博客右侧边栏中的 `RSS` 图标，即可访问 <http://col.dog/atom.xml> 。
+
+## 添加统计分析（Analytics）
 ### [hexo/next 添加 Google/百度 统计][]
+[Google Analytics（分析）][Google-Analytics] 不仅可以帮助您衡量销售与转化情况，而且能为您提供新鲜的深入信息，帮助您了解访问者如何使用您的网站，他们如何到达您的网站，以及您可以如何吸引他们不断回访。
 
-添加 Google 或者 百度 的统计 ID 即可开启网站统计。
+[百度统计][Baidu-Analytics] 是百度推出的一款免费的专业网站流量分析工具，能够告诉用户访客是如何找到并浏览用户的网站，在网站上做了些什么，有了这些信息，可以帮助用户改善访客在用户的网站上的使用体验，不断提升网站的投资回报率。
 
-编辑主题配置文件 ，新增字段 google_analytics 或者 baidu_analytics（取决于使用的统计系统）
+到 Google 或 Baidu 的统计分析门户注册自己的站点，将获得统计分析平台为你的站点分配的唯一的网站统计 ID 。
+
+编辑主题配置文件，新增 google_analytics 或 baidu_analytics 字段（取决于使用的统计系统），其值为申请到的统计 ID，即可将自己的站点接入 Google / Baidu 的统计分析平台：
 
 ```yml
 google_analytics: your-analytics-id
 baidu_analytics: your-analytics-id
 ```
 
-#### Google Search Console
-在 [Google Search Console][] 上注册自己的站点，验证身份（google_site_verification）后可以提交站点地图文件（sitemap.xml），这有助于 Google 更好地决定如何抓取您的网站，进而提高博客站点在搜索结果中的曝光率。
+下面基于 hexo/next 博客，阐述如何接入腾讯统计分析。
 
 ### hexo/next 添加 腾讯分析
 #### 为自己的站点申请腾讯分析 ID
@@ -678,7 +712,7 @@ baidu_analytics: your-analytics-id
 > 框架式网站请在框架集页面和子框架页面均安装统计代码，框架集页面请安装在 `</head>` 前。
 
 #### 将自己的站点接入腾讯分析
-1.在目录 `/themes/next/layout/_scripts/analytics/` 下新建 `tencent-analytics.swig` 文件，内容如下：
+1.在目录 `/themes/next/layout/_scripts/analytics/` 下新建 `tencent-analytics.swig` 文件，基于 `baidu-analytics.swig` 略作修改：
 
 ```swig
 {% if theme.tencent_analytics %}
@@ -711,6 +745,37 @@ tencent_analytics: $your_ta_sid
 4.重新生成部署网站，则可接入腾讯分析。
 
 在 腾讯分析 网站的个人站点列表中可以浏览网站概况，其中列出了 **今日浏览量（PV）**、**今日独立 IP**、**今日用户量（UV）** 等统计分析指标。
+
+## 提交搜索引擎收录（SiteMap）
+站点地图（SiteMap）有助于搜索引擎更好地决定如何抓取您的网站，进而提高博客站点在搜索结果中的曝光率，从而[促进博客的分享推广][]。
+
+1.在命令行终端中，通过 npm 来安装 [hexo-generator-sitemap][] 插件：
+
+```Shell
+➜  github-pages git:(master) ✗ npm install hexo-generator-sitemap --save
+hexo-generator-sitemap@1.0.1 node_modules/hexo-generator-sitemap
+├── utils-merge@1.0.0
+└── ejs@1.0.0
+```
+
+2.在站点配置文件中加载 hexo-generator-sitemap 插件：
+
+```yml
+Plugins:
+- hexo-generator-sitemap
+```
+
+3.在站点配置文件中设置 sitemap 的路径（path）为 sitemap.xml：
+
+```yml
+#sitemap
+sitemap:
+  path: sitemap.xml
+```
+
+重新编译网站，将在 `public` 目录下生成 `sitemap.xml` 文件。
+
+使用 Google/Gmail 账号登录 [Google Search Console][] ，注册自己的站点，验证身份（google_site_verification）后，可以指定博客站点的地图文件（/sitemap.xml）。之后，Google 搜索引擎会自动定时获取站点最新的 sitemap.xml 文件。
 
 ## 参考
 [Hexo 系列攻略](http://ijiaober.github.io/categories/hexo/)  
@@ -796,9 +861,21 @@ tencent_analytics: $your_ta_sid
 [添加多说评论]:https://github.com/iissnan/hexo-theme-next/wiki/%E8%AE%BE%E7%BD%AE%E5%A4%9A%E8%AF%B4-DISQUS
 [多说]:http://dev.duoshuo.com/threads/541d3b2b40b5abcd2e4df0e9
 
+<!-- ## 添加 RSS/Feed -->
+
+[添加 RSS/Feed]:https://github.com/xiangming/landscape-plus/issues/31
+[hexo-generator-feed]:https://github.com/hexojs/hexo-generator-feed
+[ATOM XML 聚合]:http://www.w4s.cn/feed/atom
+[显示 feed 链接]:https://github.com/iissnan/hexo-theme-next/wiki/%E6%98%BE%E7%A4%BA-feed-%E9%93%BE%E6%8E%A5
+
 <!-- ## 添加统计 -->
 
 [hexo/next 添加 Google/百度 统计]:https://github.com/iissnan/hexo-theme-next/wiki/%E6%B7%BB%E5%8A%A0-Google---%E7%99%BE%E5%BA%A6-%E7%BB%9F%E8%AE%A1
 [Google Search Console]:https://www.google.com/webmasters/tools/home?hl=zh-CN
 [腾讯分析首页]:http://v2.ta.qq.com/analysis/index
 [腾讯分析欢迎页]:http://v2.ta.qq.com/bind/site
+
+<!-- ## 提交搜索引擎收录 -->
+
+[促进博客的分享推广]:http://aaronyee.com/blog/2015/06/14/blog-open.html
+[hexo-generator-sitemap]:https://github.com/hexojs/hexo-generator-sitemap
