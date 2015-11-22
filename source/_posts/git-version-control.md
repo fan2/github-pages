@@ -1,7 +1,7 @@
 title: git 版本控制
 date: 2015-11-17 07:13:23
 categories: git
-tags: [git-init, git-add, git-commit, git-pull, git-push]
+tags: [git-init, git-add, git-commit, git-log, git-diff, git-pull, git-push]
 ---
 
 之前梳理介绍过 [subversion 版本控制](http://blog.csdn.net/phunxm/article/details/40834427)，本文承接《[Mac下git通过SSH进行免密码安全连接github](http://blog.csdn.net/phunxm/article/details/45083335)》，结合具体操作实例贯串讲解 git 初级版本控制日常操作流程，备忘查阅。
@@ -455,13 +455,13 @@ Launch 'opendiff' [Y/n]:
 配置 `vimdiff` 作为 git difftool：
 
 ```Shell
-git config --global diff.tool vimdiff` 
+git config --global diff.tool vimdiff
 ```
 
-[AraxisMerge和 Beyond Compare 做 git mergetool 配置](http://www.cnblogs.com/kangyi/p/4827078.html)  
-[Git 集成 Araxis Merge 作为比较和合并 GUI 工具的配置](http://blog.csdn.net/snowdream86/article/details/8807397)  
-[Using Araxis Merge with Git](https://lautaportti.wordpress.com/2009/02/11/using-araxis-merge-with-git/)  
-[how-do-i-configure-araxis-merge-for-use-with-git](http://stackoverflow.com/questions/14593817/how-do-i-configure-araxis-merge-for-use-with-git)
+- [AraxisMerge和 Beyond Compare 做 git mergetool 配置](http://www.cnblogs.com/kangyi/p/4827078.html)  
+- [Git 集成 Araxis Merge 作为比较和合并 GUI 工具的配置](http://blog.csdn.net/snowdream86/article/details/8807397)  
+- [Using Araxis Merge with Git](https://lautaportti.wordpress.com/2009/02/11/using-araxis-merge-with-git/)  
+- [how-do-i-configure-araxis-merge-for-use-with-git](http://stackoverflow.com/questions/14593817/how-do-i-configure-araxis-merge-for-use-with-git)
 
 #### git reset HEAD
 若想放弃通过 `git add` 提交到暂存区中的修改（Unstaging a Staged File/Undo an Added new modification），可执行 `git reset HEAD <file>` 撤销提交到暂存中的修改：
