@@ -86,6 +86,17 @@ node installed completion 之后，执行 `node -v` 命令可查看安装的 nod
 v4.2.1
 ```
 
+执行 `brew upgrade node` 命令可升级到最新的 node 5.1.0 ：
+
+```
+faner@MBP-FAN:~|⇒  brew upgrade node
+==> Upgrading 1 outdated package, with result:
+node 5.1.0
+==> Upgrading node
+==> Downloading https://homebrew.bintray.com/bottles/node-5.1.0.el_capitan.bottle.tar.gz
+
+```
+
 #### npm
 Node.js 默认内置了模块管理工具 —— NPM（Node Package Manager），其灵感来源于 [RubyGems][]（具有版本和依赖管理功能，可以通过在线资料库便捷安装可重用的组件的管理工具）。  
 NPM 生态系统向所有人开放，任何人都可以发布自己的模块，所有的模块都可以在 NPM 资料库中找到。一个完整的公用模块列表可以在 [NPM 的网站][] 上找到，也可以通过与 Node.js 一同安装的 NPM 客户端命令行工具访问。  
