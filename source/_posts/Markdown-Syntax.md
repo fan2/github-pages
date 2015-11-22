@@ -4,7 +4,9 @@ categories: Markdown
 tags: markdown
 ---
 
-Markdown 的目标是实现「易读易写」（easy-to-read and easy-to-write ）。本文结合示例实践，系统梳理总结了 Markdown 纯文本写作标记语言的语法基础和使用过程中的诸多规范细节。
+Markdown 的目标是实现「易读易写」（easy-to-read and easy-to-write ）。  
+本文结合示例实践，系统梳理总结了 Markdown 纯文本写作标记语言的语法基础和使用过程中的诸多规范细节。  
+本文最早发表于本人 CSDN 博客 —— [Markdown 基础教程](http://blog.csdn.net/phunxm?viewmode=list)。
 
 <!--more-->
 
