@@ -143,7 +143,7 @@ Features: AsynchDNS IPv6 Largefile GSS-API Kerberos SPNEGO NTLM NTLM_WB SSL libz
 > **curl** 是基于跨平台网络协议库 [libcurl](http://blog.csdn.net/mac_cm/article/details/6670154) 的利用 URL 语法在命令行方式下工作的开源文件传输工具。
 > [curl常用命令](http://www.cnblogs.com/gbyukg/p/3326825.html) 可参考  [curl 详解](http://blog.csdn.net/fudesign2008/article/details/7608619)、[curl网站开发指南](http://www.ruanyifeng.com/blog/2011/09/curl.html)。
 
-### [旧的安装]((http://blog.csdn.net/jiajiayouba/article/details/44261011))
+### [旧的安装](http://blog.csdn.net/jiajiayouba/article/details/44261011)
 很早之前，homebrew 的安装 url 是 `https://raw.github.com/Homebrew/homebrew/go/install`：
 
 ```Shell
