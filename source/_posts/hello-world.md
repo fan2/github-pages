@@ -51,23 +51,9 @@ Homebrew 0.9.5 (git revision 9cbe8; last commit 2015-11-08)
 如果没有安装 brew，可在 [Mac 上安装 Homebrew][] [使 OS X 更完整][]。
 
 #### brew install node
-执行 `brew install node` 命令使用 brew 安装 node，提示不能创建 `/usr/local/Cellar` 目录，原因是没有 `/usr/local` 的写权限。
+执行 `brew install node` 命令使用 brew 安装 node：
 
-```Shell
-➜  ~  brew install node
-Error: Could not create /usr/local/Cellar
-Check you have permission to write to /usr/local
 ```
-
-**[解决方法][brew_install_write_permission_issue]：**
-
-> 执行 `chown` 命令改变 `/usr/local` 的所有者为 `whoami` ，`-R` 表示递归（Recursive）。
-
-```Shell
-➜  ~  whoami
-faner
-
-➜  ~  sudo chown -R faner /usr/local
 ➜  ~  brew install node
 ==> Downloading https://homebrew.bintray.com/bottles/node-4.2.1.el_capitan.bottle.tar.gz
 ######################################################################## 100.0%
@@ -830,7 +816,6 @@ sitemap:
 [Homebrew]:http://brew.sh/index.html
 [Mac 上安装 Homebrew]:http://blog.csdn.net/delphiwcdj/article/details/19679891
 [使 OS X 更完整]:http://blog.csdn.net/aaawqqq/article/details/44088141
-[brew_install_write_permission_issue]:http://segmentfault.com/q/1010000000505091
 [RubyGems]:http://www.cnblogs.com/ihojin/p/ruby-gem-update-the-latest-version.html
 [NPM 的网站]:https:://npmjs.org/
 [静态博客框架]:http://code.csdn.net/news/2819909
