@@ -72,6 +72,7 @@ node installed completion 之后，执行 `node -v` 命令可查看安装的 nod
 v4.2.1
 ```
 
+#### brew upgrade node
 执行 `brew upgrade node` 命令可升级到最新的 node 5.1.0 ：
 
 ```
@@ -80,8 +81,28 @@ faner@MBP-FAN:~|⇒  brew upgrade node
 node 5.1.0
 ==> Upgrading node
 ==> Downloading https://homebrew.bintray.com/bottles/node-5.1.0.el_capitan.bottle.tar.gz
+faner@MBP-FAN:~|⇒  node -v
+v5.1.0
+faner@MBP-FAN:~|⇒  npm -v
+3.3.12
+```
+
+升级后，执行 `hexo generate` 报错：
+
+```Shell
+⇒  hexo g
+[Error: Module version mismatch. Expected 47, got 46.]
+{ [Error: Cannot find module './build/default/DTraceProviderBindings'] code: 'MODULE_NOT_FOUND' }
+{ [Error: Cannot find module './build/Debug/DTraceProviderBindings'] code: 'MODULE_NOT_FOUND' }
 
 ```
+
+**[解决方案](http://www.jianshu.com/p/98e993305653)**：
+
+1. 执行 `npm uninstall hexo` 卸载 hexo；
+2. 执行 `npm install -g hexo` 重新安装最新的 hexo (hexo-cli: 0.1.9)；
+3. cd 到博客目录，删除 `db.json` ，执行 `npm install hexo --no-optional`  ，重新安装 `package.json` 中配置的依赖库(node_modules)；
+4. 依次执行 `hexo clean` 和 `hexo generate` ，重新编译整个博客网站。
 
 #### npm
 Node.js 默认内置了模块管理工具 —— NPM（Node Package Manager），其灵感来源于 [RubyGems][]（具有版本和依赖管理功能，可以通过在线资料库便捷安装可重用的组件的管理工具）。  
