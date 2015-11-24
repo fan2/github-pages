@@ -69,7 +69,7 @@ Debian / Ubuntu  | DPKG      | dpkg          | APT(apt-get)
 在 [linux 众多发行版](http://mitblog.pixnet.net/blog/post/41037058-10-%E5%A5%97-linux-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E7%9A%84%E6%AF%94%E8%BC%83%E3%80%81ubuntu-vs-fedora-vs-cen)中，ubuntu 占领桌面，RHEL/[CentOS](http://www.g-loaded.eu/2009/10/05/fedora-server-vs-centos/) 占领服务器，比较小众的 **[Gentoo](https://www.gentoo.org/)** 采用独特的 **[Portage](https://zh.wikipedia.org/wiki/Portage)** 包管理系统。Gentoo 的软件树称为 Portage，对应的包管理器是 emerge，包元文件称为 ebuild。  
 Gentoo 是个强调能自由选择的分发版，它使用源码来做包管理的方式。由于能自己编译及调整源码依赖等选项，而获得至高的自定义性及优化的软件，在源码包也有相当多新旧版本的选择，因此吸引了许多狂热爱好者以及专业人士。
 
-#### RPM / SRPM
+#### [RPM / SRPM](http://linux.vbird.org/linux_basic/0520rpm_and_srpm.php)
 RPM 软件包命名规范：`name-version-release.arch.rpm`。  
 其中，`version` 表示系统的发行版，如 fc18、el6 表明这个软件包是在 Fedora 18、RHEL 6.x / CentOS 6.x 下使用的；`arch` 表示硬件平台，常见的有 i386、x86_64 等。
 
@@ -695,7 +695,7 @@ Not installed
 https://github.com/caskroom/homebrew-cask/blob/master/Casks/visual-studio-code.rb
 ==> Contents
   Visual Studio Code.app (app)
-  ~ $ brew-cask audit visual-studio-code
+~ $ brew-cask audit visual-studio-code
 audit for visual-studio-code: passed
 ~ $ brew cask install visual-studio-code
 ==> Downloading https://az764295.vo.msecnd.net/public/0.10.1-release/VSCode-darwin.zip
