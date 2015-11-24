@@ -325,7 +325,38 @@ brew prune             | 删除 /usr/local 下的无效链接(remove broken syml
 
 [brew info 查看 plist 文件](https://ruby-china.org/topics/21050)
 
-### brew install axel
+### brew install 示例
+#### tree
+linux 下的 **[tree](http://mama.indstate.edu/users/ice/tree/)** 命令以树形结构显示文件目录结构，Mac 下默认并没有该命令，只有普通的 **`ls`** 命令。可以利用 brew 查找并安装 tree 命令行工具：
+
+```Shell
+faner@MBP-FAN:~|⇒  brew search tree
+git-stree       mvptree         pstree          tree            treecc          treeline      
+homebrew/emacs/dict-tree        homebrew/science/quicktree      Caskroom/cask/treemaker       
+homebrew/emacs/undo-tree        homebrew/x11/prooftree          Caskroom/cask/treesheets      
+homebrew/emacs/ztree-emacs      Caskroom/cask/figtree         
+homebrew/science/fasttree       Caskroom/cask/sourcetree      
+faner@MBP-FAN:~|⇒  brew info tree
+tree: stable 1.7.0 (bottled)
+Display directories as trees (with optional color/HTML output)
+http://mama.indstate.edu/users/ice/tree/
+Not installed
+From: https://github.com/Homebrew/homebrew/blob/master/Library/Formula/tree.rb
+faner@MBP-FAN:~|⇒  brew deps tree
+faner@MBP-FAN:~|⇒  brew install tree
+==> Downloading https://homebrew.bintray.com/bottles/tree-1.7.0.el_capitan.bottle.1.tar.gz
+######################################################################## 100.0%
+==> Pouring tree-1.7.0.el_capitan.bottle.1.tar.gz
+🍺  /usr/local/Cellar/tree/1.7.0: 7 files, 128K
+faner@MBP-FAN:~|⇒  tree --version
+tree v1.7.0 (c) 1996 - 2014 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro
+```
+
+1. homebrew 下载已经编译好的二进制包 tree 到缓存目录 `/Library/Caches/Homebrew/tree-1.7.0.el_capitan.bottle.1.tar.gz`
+2. 解压 `tree-1.7.0.el_capitan.bottle.1.tar.gz` 到 `/usr/local/Cellar/tree/` 目录，根据版本存放到文件夹 `1.7.0` 下。
+3. 将 `/usr/local/Cellar/tree/1.7.0/bin/tree` 软链到 `/usr/local/bin/tree`，后者是前者的替身，执行 tree 命令时，真正调用的是其在 Cellar 中的真身。
+
+#### axel
 以下示例查找比 wget 下载速度高几倍的支持[断点续传](http://www.pooy.net/axel-download-helper.html)的[多线程](http://www.cnblogs.com/SunWentao/archive/2008/07/10/1239924.html)下载 CLI 命令行工具 **[axel](http://wilmer.gaast.net/main.php/axel.html)**，并显示软件包信息和依赖关系，然后安装该工具：
 
 ```Shell
@@ -358,12 +389,9 @@ Axel version 2.4 (Darwin)
 Copyright 2001-2002 Wilmer van der Gaast.
 ```
 
-1. 从 homebrew 官方仓库 `homebrew.bintray.com` 下载 axel 失败后，自动从镜像源 `mirrors.ocf.berkeley.edu` 重新下载。
+1. 从 homebrew 官方仓库 `homebrew.bintray.com` 下载 axel 失败后，自动从镜像源 `mirrors.ocf.berkeley.edu` 重新下载。下载的源码缓存到目录 `/Library/Caches/Homebrew/axel-2.4.tar.gz`。
 2. 下载完成后，依次执行 `./configure`、`make` 和 `make install` 将软件编译安装到 `/usr/local/Cellar/axel/` 目录下，根据版本存放到文件夹 `2.4` 下。
-
-**注：**
-
-> homebrew 下载源码的缓存目录为 `/Library/Caches/Homebrew/`。
+3. 将 `usr/local/Cellar/axel/2.4/bin/axel` 软链到 `/usr/local/bin/axel`，后者是前者的替身，执行 axel 命令时，真正调用的是其在 Cellar 中的真身。
 
 ## [brew cask](http://www.zhihu.com/question/22624898)
 Homebrew 作为 Ruby 社区极富想象力的作品，使得 Mac 下安装 Mysql 等常用包不再困难。那么，是否也可以通过 `brew install mysql` 这样简单的方式来安装 Google Chrome 浏览器呢？为解决这一问题，phinze 的作品 [homebrew-cask](https://github.com/phinze/homebrew-cask) 应运而生。
