@@ -500,8 +500,9 @@ tags: [git-init, git-add, git-commit, git-pull, git-push]
 在 `source` 下建立与博客 `blog.md` 同名的目录 `blog` ，用于存放图片等资源文件，首页相对引用成功；但点击进入文章，相对引用失败！  
 可参照 [hexo 资源文件夹][hexo_resource] ，看看如何设置 asset 相对路径。也可采用[七牛][qiniu]等云存储平台做图床，使用绝对路径。
 
-## 404
-推荐使用[腾讯公益404][]。
+## 404 —— 找不到页面
+当我们访问一个不存在（已删除、重命名）的页面时，将报告 HTTP 404 错误 (Not Found error message) ，提示找不到页面。  
+如果你已经绑定顶级域名，可以自定义 404 页面（GitHub 默认分配的二级域名是不起作用的），推荐使用 [腾讯公益404][]。
 
 新建 source/404.html，在 `<body>` 部分嵌入腾讯公益404的 js 代码：
 
@@ -521,7 +522,7 @@ layout: default
 ```
 
 修改“homePageUrl”、“homePageName”这两个参数即可定制返回链接。  
-重新生成部署，即可在访问本站不存在的页面（资源）时显示腾讯公益404页面。
+重新生成部署，在访问本站不存在的页面（资源）或目录时，将显示 [腾讯公益 404 页面](http://col.dog/unknown)。
 
 ## 配置主题——[Next][]
 在终端 cd 到博客站点目录 `Projects/git/blog/theme` 下，git clone 下载 NEXT 主题到本地目录 `themes/next` 下：
@@ -675,6 +676,36 @@ feed:
 主题配置文件中的 `rss` 字段的值保持为空，以便[显示 feed 链接][]。  
 重新编译网站，将在 `public` 目录下生成 `atom.xml` 文件。用户点击博客右侧边栏中的 `RSS` 图标，即可访问 <http://col.dog/atom.xml> 。
 
+在 Mac 下使用 `brew cask install vienna` 命令安装 [ViennaRSS](http://www.vienna-rss.org)：
+
+```Shell
+faner@MBP-FAN:~|⇒  brew cask search vienna
+==> Exact match
+vienna
+faner@MBP-FAN:~|⇒  brew cask info vienna  
+vienna: 3.0.9
+Vienna
+http://www.vienna-rss.org
+Not installed
+https://github.com/phinze/homebrew-cask/blob/master/Casks/vienna.rb
+==> Contents
+  Vienna.app (app)
+⇒  brew cask audit vienna  
+audit for vienna: passed
+faner@MBP-FAN:~|⇒  brew cask install vienna
+==> Downloading https://dl.bintray.com/viennarss/vienna-rss/Vienna3.0.9.tgz
+######################################################################## 100.0%
+==> Symlinking App 'Vienna.app' to '/Users/faner/Applications/Vienna.app'
+🍺  vienna staged at '/opt/homebrew-cask/Caskroom/vienna/3.0.9' (1180 files, 22M)
+```
+
+新增订阅（Create a new subscription）本博：
+
+> Source：**URL**
+> URL of news feed：http://col.dog/atom.xml
+
+![Vienna-Elsewhere](http://7xo5uz.com1.z0.glb.clouddn.com/Vienna-Elsewhere.png)
+
 ## 添加统计分析（Analytics）
 ### [hexo/next 添加 Google/百度 统计][]
 [Google Analytics（分析）][Google-Analytics] 不仅可以帮助您衡量销售与转化情况，而且能为您提供新鲜的深入信息，帮助您了解访问者如何使用您的网站，他们如何到达您的网站，以及您可以如何吸引他们不断回访。
@@ -775,9 +806,10 @@ sitemap:
 使用 Google/Gmail 账号登录 [Google Search Console][] ，注册自己的站点，验证身份（google_site_verification）后，可以指定博客站点的地图文件（/sitemap.xml）。之后，Google 搜索引擎会自动定时获取站点最新的 sitemap.xml 文件。
 
 ## 参考
-[Hexo 系列攻略](http://ijiaober.github.io/categories/hexo/)  
-[Hexo 系列教程](http://zipperary.com/categories/hexo/)  
-[hexo 你的博客](http://ibruce.info/2013/11/22/hexo-your-blog/)
+[hexo 你的博客](http://ibruce.info/2013/11/22/hexo-your-blog/) —— ibruce  
+[Hexo 系列攻略](http://ijiaober.github.io/categories/hexo/) —— ijiaober  
+[Hexo 系列教程](http://zipperary.com/categories/hexo/) —— zipperary  
+[Hexo 系列教程](http://crazykay.github.io/categories/hexo/) —— crazykay
 
 [Hexo github 独立博客](http://cnfeat.com/blog/2014/05/10/how-to-build-a-blog/)  
 [创建GitHub技术博客全攻略](http://blog.csdn.net/renfufei/article/details/37725057/)
