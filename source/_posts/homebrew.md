@@ -1,4 +1,4 @@
-title: Mac 下的包管理工具 —— brew
+title: Mac 下的软件安装 —— 从 pkg,dmg 到 brew,cask
 date: 2015-11-22 15:05:00
 categories: Mac
 tags:
@@ -7,6 +7,8 @@ tags:
 - RPM
 - SRPM
 - YUM
+- pkg
+- dmg
 - MacPorts
 - Homebrew
 - brew
@@ -14,7 +16,7 @@ tags:
 ---
 
 本文前驱铺垫梳理了从 linux 源码安装软件到 DPKG/RPM 软件包管理机制，阐述了 *UNX 平台的软件安装包管理机制的演变和现代化。  
-后半部分着重介绍 Mac 下的软件安装管理工具 —— brew 及 brew-cask，梳理日常  Command Usage。
+后半部分介绍了 Mac 下的软件安装包格式 —— pkg & dmg，以及软件包管理工具 —— brew 及 brew-cask，并梳理日常 Command Usage。
 
 <!--more-->
 
@@ -64,7 +66,7 @@ Distribution 代表 | 包管理机制 | 使用命令        | 在线升级机制
 Red Hat / Fedora | RPM       | rpm，rpmbuild | YUM(yum)
 Debian / Ubuntu  | DPKG      | dpkg          | APT(apt-get)
 
-在 [linux 众多发行版](http://mitblog.pixnet.net/blog/post/41037058-10-%E5%A5%97-linux-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E7%9A%84%E6%AF%94%E8%BC%83%E3%80%81ubuntu-vs-fedora-vs-cen)中，ubuntu 占领桌面，RHEL/[CentOS](http://www.g-loaded.eu/2009/10/05/fedora-server-vs-centos/) 占领服务器，比较小众的 [Gentoo](https://www.gentoo.org/) 采用独特的 [Portage](https://zh.wikipedia.org/wiki/Portage) 包管理系统。Gentoo 的软件树称为 Portage，对应的包管理器是 emerge，包元文件称为 ebuild。  
+在 [linux 众多发行版](http://mitblog.pixnet.net/blog/post/41037058-10-%E5%A5%97-linux-%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%E7%9A%84%E6%AF%94%E8%BC%83%E3%80%81ubuntu-vs-fedora-vs-cen)中，ubuntu 占领桌面，RHEL/[CentOS](http://www.g-loaded.eu/2009/10/05/fedora-server-vs-centos/) 占领服务器，比较小众的 **[Gentoo](https://www.gentoo.org/)** 采用独特的 **[Portage](https://zh.wikipedia.org/wiki/Portage)** 包管理系统。Gentoo 的软件树称为 Portage，对应的包管理器是 emerge，包元文件称为 ebuild。  
 Gentoo 是个强调能自由选择的分发版，它使用源码来做包管理的方式。由于能自己编译及调整源码依赖等选项，而获得至高的自定义性及优化的软件，在源码包也有相当多新旧版本的选择，因此吸引了许多狂热爱好者以及专业人士。
 
 #### RPM / SRPM
@@ -90,8 +92,31 @@ SRPM    | `xxx.src.rpm` | ×         | 未编译的源码  | √
 RPM 建包的原理并不复杂，可以理解为按照标准的格式整理一些信息，包括：软件基础信息，以及安装、卸载前后执行的[脚本](http://hlee.iteye.com/blog/343499)，对源码包解压、打补丁、编译，安装路径和文件等。我们可以基于标准规范，来[使用 rpmbuild 制作自己的 RPM 包](http://hlee.iteye.com/blog/343499)。
 
 ## [Mac 软件包管理工具](https://github.com/pubyun/macdev/blob/master/basic.md)
-linux 下的 apt-get 和 yum 命令行工具分别适用于 deb、rpm 包管理方式的发行版本，主要用于自动从互联网的软件仓库中搜索、安装、升级和卸载软件。  
-在 Mac OS X 平台下，同样有优秀的软件包管理工具，可以管理大量 AppleStore 没有提供、而又经常会用到的开源软件包。我们有两种选择 —— MacPorts 和 Homebrew。
+linux 平台下的 apt-get 和 yum 命令行工具分别适用于 deb、rpm 包管理方式的发行版本，主要用于自动从互联网的软件仓库中搜索、安装、升级和卸载软件。在 Mac OS X 平台下，除了直接从 AppleStore 下载认证上架的软件进行安装外，还可以在系统偏好设置的【安全性与隐私】中允许从**任何来源**下载的应用。  
+
+### dmg & pkg
+一些应用会提供 [dmg、pkg](http://www.xitongzhijia.net/xtjc/20150303/39862.html) 安装包，例如 `git-2.5.3-intel-universal-mavericks.dmg`、`Subversion-1.9.2_10.10.x.pkg`。
+
+1. **dmg** 是苹果的压缩镜像文件（类似 Windows 下的 iso ），它是 Mac 应用软件通用的打包格式（相当于 ipa），里面一般包含 `应用程序.app` 的图标和一个应用程序文件夹（`/Applications`）快捷方式，直接将 `应用程序.app` 拖曳至应用程序文件夹即可完成安装。卸载也同样绿色，直接在 `Launchpad` 中或 cd 到  `/Applications` 目录下删除应用（文件夹）即可。
+2. **[pkg](https://en.wikipedia.org/wiki/.pkg)** 属于系统级软件的安装程序，相当于 iOS 越狱后装的 deb，一般会修改系统配置，权限较高。pkg 安装一般要求 sudo 授权，[卸载 pkg 安装的应用](http://blog.csdn.net/play_fun_tech/article/details/27964861) 也比较麻烦。pkg 类似 Windows 下的安装程序 Setup.exe 和 *.[msi]((https://msdn.microsoft.com/en-us/library/cc185688(v=vs.85).aspx)) 。  
+	Windows 下可以使用 [Install Shield](http://www.flexerasoftware.com/producer/products/software-installation/installshield-software-installer/) 来 [制作安装程序](http://www.yesky.com/460/1843460.shtml)，可使用 Xcode 自带的 [PackageMaker](http://www.identityfinder.com/kb/Enterprise-Documentation/046141) 或打包命令行工具 [pkgbuild](http://developer.apple.com/library/mac/documentation/Darwin/Reference/Manpages/man1/pkgbuild.1.html)+[productbuild](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/productbuild.1.html)+[pkgutil](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/pkgutil.1.html) 或 [Iceberg](http://s.sudre.free.fr/Software/Iceberg.html)（an Integrated Packaging Environment (IPE) ）来[制作安装包](http://blog.csdn.net/handsomerocco/article/details/7761212)。
+3. **mpkg**：pkg 是单个[应用程序的安装包](http://blog.csdn.net/dongdongdongjl/article/details/7896771)，而 mpkg（multi pkg）是多个 pkg 。我们来看一下从 AppleStore 下载的 OS X EI Capitan 安装器文件——`安装 OS X EI Capitan.app` 的 `/Contents/SharedSupport` 目录：
+
+	```Shell
+	faner@MBP-FAN:/Applications/Install OS X El Capitan.app/Contents/SharedSupport|
+	⇒  tree 
+	.
+	├── InstallESD.dmg
+	└── OSInstall.mpkg
+	
+	0 directories, 2 files
+	```
+
+	> 下载完 `安装 OS X EI Capitan.app` 之后，可以使用 **`createinstallmedia`** 命令[制作 U 盘安装盘](http://bbs.feng.com/read-htm-tid-9930245.html)，或[恢复到 U 盘制作启动盘](http://bbs.feng.com/read-htm-tid-5045869.html)。
+
+4. **dmg with pkg**：像 `git-2.5.3-intel-universal-mavericks.dmg` 这种 dmg 打包的是 git command CLI 的安装 pkg，需要使用 DiskImageMounter 挂载 dmg，然后打开 pkg（使用 Installer），按照引导一步步 next 即可安装完成。当然也可使用 [命令行](http://www.it165.net/os/html/201207/2764.html) 完成挂载安装操作。
+
+除了使用 dmg、pkg 来安装软件外，Mac 下同样有优秀的软件包管理工具，可以下载、安装和管理大量 AppleStore 没有提供、而又经常会用到的开源软件。我们有两种选择 —— MacPorts 和 Homebrew。
 
 ### [MacPorts](http://www.macports.org/)
 [MacPorts](http://chenpeng.info/html/1753) (DarwinPorts) 是由 [FreeBSD](http://www.freebsd.org/) 的 port 移植而来的软件包管理系统，，用来简化 Mac OS X和 Darwin 操作系统上软件的安装。在 Mac 中安装 MacPorts [让你在Mac 的 Shell 下更加游刃有余](http://www.linuxidc.com/Linux/2012-01/52111.htm)。  
