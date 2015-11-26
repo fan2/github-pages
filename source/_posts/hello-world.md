@@ -100,9 +100,11 @@ faner@MBP-FAN:~|⇒  npm -v
 
 **[解决方案](http://www.jianshu.com/p/98e993305653)**：
 
+由于天朝网络问题，没全部下载完（Expected 47, got 46）。具体来说，缺少 `dtrace-provider` 这个 module（可检查 node_modules 目录）。翻墙或按以下方案解决：
+
 1. 执行 `npm uninstall hexo` 卸载 hexo；
-2. 执行 `npm install -g hexo` 重新安装最新的 hexo (hexo-cli: 0.1.9)；
-3. cd 到博客目录，~~删除 db.json~~，执行 `npm install hexo --no-optional`  ，重新安装 `package.json` 中配置的依赖库(node_modules)；
+2. 执行 `npm install -g hexo --no-optional` 重新安装最简 hexo (hexo-cli: 0.1.9)；
+3. cd 到博客目录，~~删除 db.json~~，执行 `npm install`  ，重新安装 `package.json` 中配置的依赖库(node_modules)；
 4. 依次执行 `hexo clean` 和 `hexo generate` ，重新编译整个博客网站。
 
 ## NPM 安装 hexo
