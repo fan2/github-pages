@@ -734,25 +734,25 @@ DESCRIPTION
 
 ## 参考：
 
-&nbsp;&nbsp;&nbsp;&nbsp;《[写给Git初学者的7个建议](http://blog.jobbole.com/50603/)》
+&nbsp;&nbsp;&nbsp;&nbsp;《[写给Git初学者的7个建议](http://blog.jobbole.com/50603/)》《[Git 的使用感受](http://www.devtang.com/blog/2012/02/03/talk-about-svn-and-git/)》  
 &nbsp;&nbsp;&nbsp;&nbsp;《[我也用github](http://blog.csdn.net/xiahouzuoxin/article/details/9393119)》《[git/github初级运用自如](http://www.cnblogs.com/fnng/archive/2012/01/07/2315685.html)》
 
-&nbsp;&nbsp;&nbsp;&nbsp;《[git - 简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)》《[IBM developerWorks-Git之旅](http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/)》
-&nbsp;&nbsp;&nbsp;&nbsp;《[看日记学git](http://roclinux.cn/?cat=72&paged=5)》《[码农老毕-开发工具之git](http://blog.csdn.net/wirelessqa/article/category/1522507)》《[Git Cookbook](http://blog.sevenche.com/2014/02/Git-cook-book/)》
-&nbsp;&nbsp;&nbsp;&nbsp;《[Git快速使用指南](http://blog.atime.me/note/git-quick_reference.html)》《[Git进阶教程](http://blog.atime.me/note/git-advanced_tutorial.html)》
+&nbsp;&nbsp;&nbsp;&nbsp;《[git - 简明指南](http://rogerdudler.github.io/git-guide/index.zh.html)》《[IBM developerWorks-Git之旅](http://www.ibm.com/developerworks/cn/opensource/os-cn-tourofgit/)》  
+&nbsp;&nbsp;&nbsp;&nbsp;《[看日记学git](http://roclinux.cn/?cat=72&paged=5)》《[码农老毕-开发工具之git](http://blog.csdn.net/wirelessqa/article/category/1522507)》《[Git Cookbook](http://blog.sevenche.com/2014/02/Git-cook-book/)》  
+&nbsp;&nbsp;&nbsp;&nbsp;《[Git快速使用指南](http://blog.atime.me/note/git-quick_reference.html)》《[Git进阶教程](http://blog.atime.me/note/git-advanced_tutorial.html)》  
 &nbsp;&nbsp;&nbsp;&nbsp;《[Git远程操作详解](http://www.ruanyifeng.com/blog/2014/06/git_remote.html)》《[Git分支管理策略](http://www.ruanyifeng.com/blog/2012/07/git.html)》
 
-&nbsp;&nbsp;&nbsp;&nbsp;《[廖雪峰-Git教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)》《[Git版本控制系統](https://ihower.tw/git/index.html)》
-&nbsp;&nbsp;&nbsp;&nbsp;《OPEN经验库 - [Git起步](http://www.open-open.com/lib/view/1328069609436) & [Git基础](http://www.open-open.com/lib/view/open1328069733264.html)》
-&nbsp;&nbsp;&nbsp;&nbsp;《[Git权威指南](http://wenku.baidu.com/view/51d372c22cc58bd63186bdc7.html)》《[GotGitHub](http://www.worldhello.net/gotgithub/index.html)》
-&nbsp;&nbsp;&nbsp;&nbsp;《[Git Reference](http://gitref.org/)》《[Git参考手册](http://gitref.justjavac.com/index.html)》
-&nbsp;&nbsp;&nbsp;&nbsp;《[Git Community Book 中文版](http://gitbook.liuhui998.com/)》《[Git历险记](http://liuhui998.com/2011/01/21/git-adventures-1/)》
-&nbsp;&nbsp;&nbsp;&nbsp;《Git Book/Pro Git: [en](http://git-scm.com/book/en/v2) & [cn](http://git-scm.com/book/zh/v2/)》《[progit2 on GitHub](https://github.com/progit/progit2)》
+&nbsp;&nbsp;&nbsp;&nbsp;《[廖雪峰-Git教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)》《[Git版本控制系統](https://ihower.tw/git/index.html)》  
+&nbsp;&nbsp;&nbsp;&nbsp;《OPEN经验库 - [Git起步](http://www.open-open.com/lib/view/1328069609436) & [Git基础](http://www.open-open.com/lib/view/open1328069733264.html)》  
+&nbsp;&nbsp;&nbsp;&nbsp;《[Git权威指南](http://wenku.baidu.com/view/51d372c22cc58bd63186bdc7.html)》《[GotGitHub](http://www.worldhello.net/gotgithub/index.html)》  
+&nbsp;&nbsp;&nbsp;&nbsp;《[Git Reference](http://gitref.org/)》《[Git参考手册](http://gitref.justjavac.com/index.html)》  
+&nbsp;&nbsp;&nbsp;&nbsp;《[Git Community Book 中文版](http://gitbook.liuhui998.com/)》《[Git历险记](http://liuhui998.com/2011/01/21/git-adventures-1/)》  
+&nbsp;&nbsp;&nbsp;&nbsp;《Git Book/Pro Git: [en](http://git-scm.com/book/en/v2) & [cn](http://git-scm.com/book/zh/v2/)》《[progit2 on GitHub](https://github.com/progit/progit2)》  
 &nbsp;&nbsp;&nbsp;&nbsp;《[Git Guys](http://www.gitguys.com/table-of-contents/?lang=zh)》《[Atlassian Git Tutorial](https://www.atlassian.com/git/)》
 
 &nbsp;&nbsp;&nbsp;&nbsp;《[git中文入门教学视频1](http://www.youku.com/playlist_show/id_22222576.html)》 《[git中文入门教学视频2](http://www.jikexueyuan.com/course/git/)》
 
-&nbsp;&nbsp;&nbsp;&nbsp;《[git-flow 备忘清单](http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html)》《[Git工作流](http://www.jianshu.com/p/Ev3s2o)》《[Git 使用规范流程](http://www.ruanyifeng.com/blog/2015/08/git-use-process.html)》
-&nbsp;&nbsp;&nbsp;&nbsp;《[Git思维导图](https://ruby-china.org/topics/17590)》《[msysGit思维导图](http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html)》
-&nbsp;&nbsp;&nbsp;&nbsp;《[托管项目到GitHub](http://blog.csdn.net/lxd875697126/article/details/22976183)》《[上传本地项目到github](http://blog.csdn.net/yangbo_hbzjk/article/details/9022767)》
+&nbsp;&nbsp;&nbsp;&nbsp;《[git-flow 备忘清单](http://danielkummer.github.io/git-flow-cheatsheet/index.zh_CN.html)》《[Git工作流](http://www.jianshu.com/p/Ev3s2o)》《[Git 使用规范流程](http://www.ruanyifeng.com/blog/2015/08/git-use-process.html)》  
+&nbsp;&nbsp;&nbsp;&nbsp;《[Git思维导图](https://ruby-china.org/topics/17590)》《[msysGit思维导图](http://www.cnblogs.com/1-2-3/archive/2010/07/18/git-commands.html)》  
+&nbsp;&nbsp;&nbsp;&nbsp;《[托管项目到GitHub](http://blog.csdn.net/lxd875697126/article/details/22976183)》《[上传本地项目到github](http://blog.csdn.net/yangbo_hbzjk/article/details/9022767)》  
 &nbsp;&nbsp;&nbsp;&nbsp;《[如何高效利用GitHub](http://www.yangzhiping.com/tech/github.html)》《[Git的深入理解与GitHub托管服务的使用](http://www.cnblogs.com/cocowool/archive/2012/02/17/2356125.html)》
