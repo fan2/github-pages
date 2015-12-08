@@ -393,6 +393,9 @@ Copyright 2001-2002 Wilmer van der Gaast.
 2. 下载完成后，依次执行 `./configure`、`make` 和 `make install` 将软件编译安装到 `/usr/local/Cellar/axel/` 目录下，根据版本存放到文件夹 `2.4` 下。
 3. 将 `usr/local/Cellar/axel/2.4/bin/axel` 软链到 `/usr/local/bin/axel`，后者是前者的替身，执行 axel 命令时，真正调用的是其在 Cellar 中的真身。
 
+#### [subversion](https://subversion.apache.org/packages.html#osx)
+`search-info-deps-install` 过程日志参考 [brew install subversion.log](http://pan.baidu.com/s/1genD2JT)。
+
 ## [brew cask](http://www.zhihu.com/question/22624898)
 Homebrew 作为 Ruby 社区极富想象力的作品，使得 Mac 下安装 Mysql 等常用包不再困难。那么，是否也可以通过 `brew install mysql` 这样简单的方式来安装 Google Chrome 浏览器呢？为解决这一问题，phinze 的作品 [homebrew-cask](https://github.com/phinze/homebrew-cask) 应运而生。
 
@@ -675,7 +678,8 @@ brew-cask 并没有提供 brew 的 `upgrade` 命令，升级更新软件只能�
 1. 进入应用软件的【关于】，手动检查是否可更新升级，使用软件自己的更新流程。
 2. 卸载重装 (`brew cask uninstall ` && `brew cask install `) ，实现间接升级。
 
-### [安装文件预览插件](http://www.cocoachina.com/mac/20141112/10198.html)
+### brew-cask install 示例
+#### [文件预览插件](http://www.cocoachina.com/mac/20141112/10198.html)
 有些插件可以让 Mac 上的文件预览更有效，比如语法高亮、markdown 渲染、json 预览等等。通过 `brew cask install` 命令可以安装这些插件：
 
 ```Shell
@@ -690,7 +694,7 @@ $ brew cask install webp-quicklook
 $ brew cask install suspicious-package
 ```
 
-### 安装 Visual Studio Code
+#### [Visual Studio Code](https://code.visualstudio.com/)
 
 ```Shell
 ~ $ brew cask search visual-studio-code
@@ -731,6 +735,9 @@ audit for visual-studio-code: passed
 ==> Symlinking App 'Visual Studio Code.app' to '/Users/thomasfan/Applications/Visual Studio Code.app'
 🍺  visual-studio-code staged at '/opt/homebrew-cask/Caskroom/visual-studio-code/0.10.1' (1675 files, 177M)
 ```
+
+#### [Wireshark](https://www.wireshark.org/)
+`search-info-cat-audit-install` 过程日志参考 [brew-cask install wireshark.log](http://pan.baidu.com/s/1bnKFxkr)。
 
 ## 参考
 [Mac 利器：brew、brew cask、zsh](http://my.oschina.net/evilgod528/blog/306548)  
