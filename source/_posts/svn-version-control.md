@@ -1,7 +1,7 @@
 title: svn 版本控制
 date: 2015-11-27 14:36:30
 categories: svn
-tags: [git-init, git-add, git-commit, git-log, git-diff, git-pull, git-push]
+tags: [svn-info, svn-log, svn-revert, svn-diff, svn-patch, svn-merge]
 ---
 
 之前介绍过 [subversion 版本控制](http://blog.csdn.net/phunxm/article/details/40834427)，本文梳理日常 svn 操作流程，备忘查阅。
