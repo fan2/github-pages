@@ -723,12 +723,20 @@ faner@MBP-FAN:~|⇒  brew cask install vienna
 🍺  vienna staged at '/opt/homebrew-cask/Caskroom/vienna/3.0.9' (1180 files, 22M)
 ```
 
-新增订阅（Create a new subscription）本博：
+- **新增订阅**（Create a new subscription）：
 
 > Source：**URL**
 > URL of news feed：http://col.dog/atom.xml
 
 ![Vienna-Elsewhere](http://7xo5uz.com1.z0.glb.clouddn.com/Vienna-Elsewhere.png)
+
+- **偏好设置**
+	1. `View | Style`
+		- default: Tyger Graphite
+		- 可选：Tyger、Minimalista Sans-serif
+	2. `Folder|` 展开格式
+		- Use Current Style for Articles：展开摘要
+		- Use Web Pages for Articles：展开全文
 
 ## 添加统计分析（Analytics）
 ### [hexo/next 添加 Google/百度 统计][]

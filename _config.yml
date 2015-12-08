@@ -24,8 +24,8 @@ links_title: 友情链接
 links:
   myCSDN: http://blog.csdn.net/phunxm
   sadpast: http://www.sadpast.com/
-  litten: http://litten.github.io/
   ghostzhang: http://blog.cssforest.org/
+  onevcat: http://onevcat.com/
   objccn: http://objccn.io/
   mactalk: http://macshuo.com/
   唐巧: http://blog.devtang.com/
@@ -34,7 +34,6 @@ links:
   枫影阁: http://justinyan.me/
   張琮翔: http://blog.vgod.tw/
   sunnyxx: http://blog.sunnyxx.com/
-  onevcat: http://onevcat.com/
 
 # Directory
 source_dir: source
