@@ -144,7 +144,7 @@ MacPorts 和 Homebrew 这两种包管理系统的工作方式都是下载源代�
 **brew** 是从软件包仓库下载源代码码到本地进行解压，进而执行 `./configure` && `make install` ，将软件编译安装到单独的目录（`/usr/local/Cellar`）下，然后软链（symlink）到 `/usr/local` 目录下，同时会自动检测下载相关依赖库，并自动配置好各种环境变量。  
 这个对程序员来说简直是福音，使用简单的指令就能快速安装、升级和卸载本地的各种开发环境。
 
-## 安装 brew
+### 安装 brew
 brew 的安装很简单，使用一条 ruby 命令调用 curl 下载安装即可。
 
 **1.Mac OS X 上默认已安装 [ruby](https://www.ruby-lang.org/)：**
@@ -168,7 +168,7 @@ Features: AsynchDNS IPv6 Largefile GSS-API Kerberos SPNEGO NTLM NTLM_WB SSL libz
 > **curl** 是基于跨平台网络协议库 [libcurl](http://blog.csdn.net/mac_cm/article/details/6670154) 的利用 URL 语法在命令行方式下工作的开源文件传输工具。
 > [curl常用命令](http://www.cnblogs.com/gbyukg/p/3326825.html) 可参考  [curl 详解](http://blog.csdn.net/fudesign2008/article/details/7608619)、[curl网站开发指南](http://www.ruanyifeng.com/blog/2011/09/curl.html)。
 
-### [旧的安装](http://blog.csdn.net/jiajiayouba/article/details/44261011)
+#### [旧的安装](http://blog.csdn.net/jiajiayouba/article/details/44261011)
 很早之前，homebrew 的安装 url 是 `https://raw.github.com/Homebrew/homebrew/go/install`：
 
 ```Shell
@@ -194,7 +194,7 @@ faner
 ➜  ~  sudo chown -R faner /usr/local
 ```
 
-### 新的安装
+#### 新的安装
 可以在 [brew 的官网首页](http://brew.sh/index.html)的末尾看到最新的安装代码：
 
 ```Shell
@@ -253,7 +253,8 @@ Run `brew help` to get started
 ~ $ 
 ```
 
-## brew -v / --version
+### brew help
+#### brew -v / --version
 安装完 brew，执行 `brew -v` 命令可以查看安装的 brew 版本信息：
 
 ```Shell
@@ -263,7 +264,7 @@ faner@MBP-FAN:~|⇒  brew --version
 0.9.5 (git revision 1eec1; last commit 2015-11-21)
 ```
 
-## brew help
+#### brew 常用命令
 执行 `brew` 查看帮助概要（Example usage、Troubleshooting、Brewing）：
 
 > -h / --h / --help / help
@@ -298,8 +299,6 @@ Further help:
 1. 执行 `man brew` 可查看详细的 brew 帮助文档。
 2. 执行 `man home` 可调用浏览器打开 brew 官方网站。
 
-### brew 常用命令
-
 命令				      | 说明
 -----------------------|---------------------
 brew update            | 更新 brew
@@ -314,7 +313,7 @@ brew upgrade           | 更新已安装的软件包，可指定 FORMULA
 brew doctor            | 诊断 homebrew 环境
 brew prune             | 删除 /usr/local 下的无效链接(remove broken symlinks)
 
-### brew info
+#### brew info
 **`brew info`** 显示软件包信息，一般包括：
 
 - 软件概要信息
