@@ -1,5 +1,5 @@
 title: vim 学习 012 - vim 分屏窗口和标签页面
-date: 2015-12-13 15:27:30
+date: 2015-12-13 15:58:10
 categories: vim
 tags: [vim-split-windows, vim-tab-pages]
 ---
