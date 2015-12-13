@@ -11,7 +11,7 @@ tags: vim-fold
 [vim fold](http://blog.csdn.net/fangjuniceflame/article/details/4560891)
 ---
 
-最近需要折叠，于是[找了一下](http://www.linux.com/article.pl?sid=06/05/18/1915233)。其实手册里面有，不过手册做的太好太详细的后果往往就是让人懒得看了。写的东西超过五六屏以后，感觉翻来翻去就不怎么方便了，看起来也很混乱。这个时候最好就能折叠起来。VIM里面也有VS里面那样的折叠功能，而且不需要用鼠标去点那个减号和加号。
+最近需要折叠，于是[找了一下](http://www.linux.com/article.pl?sid=06/05/18/1915233)。其实手册里面有，不过手册做的太好太详细的后果往往就是让人懒得看了。写的东西超过五六屏以后，感觉翻来翻去就不怎么方便了，看起来也很混乱。这个时候最好就能折叠起来。VIM里面也有 VS 那样的折叠功能，而且不需要用鼠标去点那个减号和加号。
 
 ## foldenable
 This option can be used to quickly switch between showing all text unfolded and viewing the text with folds (including manually opened or closed folds).  
@@ -76,12 +76,12 @@ The nesting of folds is limited with 'foldnestmax'.
 差异折叠 / diff   | Fold text that is not changed.
 
 可针对当前 vim 编辑文档，在底行模式使用 `:set fdm=marker` 命令来设置成 `marker` 折叠方式。  
-当使用 marker 方式时，需要用标计来标识代码的折叠，系统默认是 {{{ 和 }}}，即基于 Block 文本对象折叠，最好不要改动。  
+当使用 marker 方式时，需要用标计来标识代码的折叠，系统默认是 <kbd>{</kbd> <kbd>{</kbd><kbd>{</kbd> 和 <kbd>}</kbd><kbd>}</kbd><kbd>}</kbd>，即基于 Block 文本对象折叠，最好不要改动。  
 可以每次针对当前 vim 编辑窗口，在底行模式通过 `:set fdm=XXX` 来设置折叠方式，也可将其配置到 .vimrc 文件中。后面针对特定文件也可在底行模式动态变更折叠方式。
 
 **注意：**
 
-> 每一种折叠方式不兼容，如不能既用 `expr` 又用 `marker` 方式，可以轮流使用 `indent` 和`marker` 方式进行折叠。
+> 每一种折叠方式不兼容，如不能既用 `expr` 又用 `marker` 方式，可以轮流使用 `indent` 和 `marker` 方式进行折叠。
 
 ### indent tabstop
 [vim的shiftwidth、tabstop、softtabstop设置](http://blog.csdn.net/ludonghai715/article/details/5657712)  
