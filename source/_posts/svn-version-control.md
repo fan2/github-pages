@@ -18,7 +18,7 @@ tags: [svn-info, svn-log, svn-revert, svn-diff, svn-patch, svn-merge]
 > 2. 在弹出的 TortoiseSVN Settings 页面中选择 **`Saved Data`** 选项； 
 > 3. 点击 **`Authentication data`** 对应的 **Clear** 按钮。
 
-终端 `svn checkout --help` 或 `svn commit --help` 可看到 Global options 中通过 --username/--password 选项可指定用户名和密码：
+终端 `svn checkout --help` 或 `svn commit --help` 可看到 **_Global options_** （适用于 svn 大部分 subcommands）中通过 `--username`/`--password` 选项可指定用户名和密码：
 
 ```Shell
 Global options:
@@ -26,7 +26,7 @@ Global options:
   --password ARG           : specify a password ARG
 ```
 
-如果想临时使用别人的账号 checkout 或 commit 代码，而不使用缓存的 auth token，通过指定 --username/--password 参数进行 svn 操作即可。
+如果想临时使用别人的账号 checkout 或 commit 代码，而不使用缓存的 auth token，通过指定 `--username`/`--password` 参数进行 svn 操作即可。
 
 ```Shell
 $ svn co URL --username user --password pwd
@@ -96,6 +96,121 @@ Last Changed Rev: 89
 Last Changed Date: 2015-09-12 00:42:38 +0800 (六, 12  9 2015)
 ```
 
+## svn status
+[status](http://blog.linuxphp.org/archives/1377/) (stat, st): 显示工作副本（Working Copy）中的目录与文件状态。
+
+执行 `svn status` 或 `svn up`（`svn merge`）等命令时，出现在首位置的标志含义如下表：
+
+标志 | 状态
+----|-----------
+“ ” | 无修改
+A   | 增加（Added）
+D   | 删除（Deleted）
+I   | 忽略（Ignored）
+M   | 改变（Modified）
+[MM](http://stackoverflow.com/questions/10180700/what-does-mm-means-when-i-run-a-svn-diff)  | 文件的属性和内容都被改变了
+U   | 表示更新（Updated）
+UU  | 文件的属性和内容都更新了
+C   | 冲突（Conflicted）
+G   | 合并（Merged）
+E   | 已经存在（Existed）
+R   | 替换（Replaced）
+X   | 未纳入版本控制的目录，被外部引用的目录所创建
+?   | 未纳入版本控制，需要执行 `svn add`
+!   | 该项目已遗失(被非 svn 命令删除)或不完整
+~   | 版本控制下的项目与其它类型的项目重名
+
+执行 `svn status` 没有指定选项参数时，默认只显示本地修改条目的摘要信息（`-q`）。   也可以指定 `-v` （`--verbose`）选项，显示每个条目的完整版本信息。
+
+## svn add
+
+```Shell
+faner@MBP-FAN:~|⇒  svn add --help
+add: Put files and directories under version control, scheduling them for addition to repository.
+They will be added in next commit.
+
+usage: add PATH...
+```
+
+`svn add` 支持添加单个**文件**到版本控制，同时亦支持添加**文件夹**，它将自动将文件夹下未纳入版本控制的文件添加到 svn 版本控制。
+
+```Shell
+$ pwd
+~/Projects/branch/Classes/module/FAUI/FAView
+$ svn add FAViewBottom.h FAViewBottom.m
+A         FAViewBottom.h
+A         FAViewBottom.m
+```
+
+执行完 `svn add` 将文件（夹）添加到本地 WC（Working Copy）之后，还需要执行 commit 命令提交到服务器：
+
+> $ svn commit -m 'add FAViewBottom'
+
+## svn commit 
+
+```Shell
+faner@MBP-FAN:~|⇒  svn commit --help
+commit (ci): Send changes from your working copy to the repository.
+usage: commit [PATH...]
+
+  A log message must be provided, but it can be empty.  If it is not given by a --message or --file option, an editor will be started.
+
+Valid options:
+  -q [--quiet]             : print nothing, or only summary information
+  --depth ARG              : limit operation by depth ARG ('empty', 'files', 'immediates', or 'infinity')
+  -m [--message] ARG       : specify log message ARG
+  -F [--file] ARG          : read log message from file ARG
+  --editor-cmd ARG         : use ARG as external editor
+```
+
+执行 `svn checkout` 将代码下载到本地进行增删改后，如果需要上库同步修改成果，可执行 `svn commit` 命令提交修改。
+
+`svn commit` 支持提交单个**文件**，同时亦支持提交**文件夹**，它将自动收集提交文件夹下有改动的文件。
+
+参数 `-m [--message]` 指定此次提交的日志，或通过 `-F [--file]` 选项指定从文件中读取日志。
+
+> $ svn ci test.m -m "This is log message"
+> $ svn ci test.m -F log.txt
+
+`svn commit -m `提交代码时，通常只能写一行日志信息。如果想要书写**多行日志**，可以通过 `$' '` 格式支持换行。  
+`$' '`：单引号引用的内容中支持使用转义字符 `\n` 进行换行，可 echo 查看效果：
+
+```Shell
+$ echo $'This is the first line\nThis is the second line'
+This is the first line
+This is the second line
+```
+
+> $ svn ci test.m -m $'This is the first line\nThis is the second line'
+
+`svn commit` 提交代码时，可通过 `-editor-cmd` 参数选项指定 log 编辑器。例如，以下提交代码时将打开 `vim` 撰写日志（`:wq` 保存退出提交）。
+
+> $ svn ci test.m --editor-cmd=vim
+
+## svn delete
+
+```Shell
+faner@MBP-FAN:~|⇒  svn delete --help
+delete (del, remove, rm): Remove files and directories from version control.
+usage: 1. delete PATH...
+       2. delete URL...
+
+```
+
+`svn delete` 支持将单个**文件**移除版本控制，同时亦支持删除**文件夹**，它将自动递归将文件夹下的文件解除版本控制。
+
+```Shell
+$ pwd
+~/Projects/branch/Classes/module/FAUI/FAView
+$ svn delete FAViewBottom.h FAViewBottom.m
+D         FAViewBottom.h
+D         FAViewBottom.m
+```
+
+执行完 `svn delete` 将文件（夹）从到本地 WC（Working Copy）中解除版本控制之后，还需要执行 commit 命令提交到服务器：
+
+> $ svn commit -m 'delete FAViewBottom'
+
 ## [svn log](http://www.nc21.cn/ncnet/article.asp?nc=15-12-147-0-6735.xhtml)
 - 显示当前 svn 工程的 log（till base of the working copy）
 
@@ -117,11 +232,11 @@ Last Changed Date: 2015-09-12 00:42:38 +0800 (六, 12  9 2015)
 
 > $ svn log path/to/your-svn-repo/directory/file.c@113629
 
-- 显示服务器上某个文件在某几个 revision 之间（`-r` 选项）的变更日志
+- 显示服务器上某个文件在某几个 revision 之间（`-r`（`--revision`）选项）的变更日志
 
 > $ svn log path/to/your-svn-repo/directory/file.c -r 113714:113629
 
-- 查看最近 N 条log，`-l` 选项指定 limitation，后面的 N 为数字
+- 查看最近 N 条log，`-l` （`--limit`）选项指定 limitation，后面的 N 为数字
 
 > $ svn log -l N
 
@@ -130,6 +245,11 @@ Last Changed Date: 2015-09-12 00:42:38 +0800 (六, 12  9 2015)
 - 日志重定向到文件
 
 > $ svn log -r 14 > svn.log
+
+**注意**:
+
+> 当你执行 svn commit 提交后，svn log 并不能看到刚才提交的版本日志。
+需要执行 **update** 以后，才能看到最新的 log，因为 commit 和 update 是独立的操作，commit 并不更新本地版本信息！
 
 ## svn revert
 
@@ -151,9 +271,17 @@ usage: revert PATH...
 
 	> svn revert test.mm
 
-2. 恢复文件夹：
+2. 恢复文件夹（--recursive）：
 
 	> svn revert -R .
+
+3. **Roll back (Undo)**
+
+`svn revert` 没有 `-r ` 选项来支持回滚到指定版本号，只能通过间接方式手动实现回滚。
+
+> TortoiseSVN → Show log → 选中需要回滚的版本 → 右键 → Export（命令行 `svn checkout -r  `）
+
+通过以上操作，直接 export 一个你需要的版本，然后用 export 的版本覆盖最新版本，commit 即实现了等效的回滚。
 
 ## svn diff
 `svn diff` 命令用于查看当前目录下的改动（依次 svn diff 各个有改动的文件的差异）：
