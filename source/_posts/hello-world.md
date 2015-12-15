@@ -73,7 +73,7 @@ v4.2.1
 ```
 
 #### brew upgrade node
-暂时可略过此节。  
+暂时可先略过此节。  
 后续可执行 `brew upgrade node` 命令可升级到最新的 node 5.1.0 ：
 
 ```
@@ -848,7 +848,8 @@ sitemap:
 
 [用 HEXO 搭建个人博客](http://andy-yao.me/2015/05/06/blog-with-hexo/)  
 [搭建你自己的 Hexo 博客](http://blog.newbmiao.com/2015/06/16/hexo-on-your-github.html)  
-[简明 Github Pages 与 Hexo 教程](http://blog.csdn.net/poem_of_sunshine/article/details/29369785/)
+[简明 Github Pages 与 Hexo 教程](http://blog.csdn.net/poem_of_sunshine/article/details/29369785/)  
+[Hexo world ！—— 博客搭建教程](http://luoluodafang.info/2015/01/27/hexo-world--how-to-build-hexo-blog/)
 
 [Hexo 3.0 静态博客使用指南](http://segmentfault.com/a/1190000002592993)  
 [Hexo 搭建 Github 静态博客](http://www.cnblogs.com/zhcncn/p/4097881.html)  
@@ -858,7 +859,8 @@ sitemap:
 [hexo 主题优化](http://www.voidking.com/2015/05/31/deve-hexo-theme-optimize/)  
 [Hexo 博客优化](http://www.bubuko.com/infodetail-618287.html)  
 [hexo 的私人订制](http://blog.sunnyxx.com/2014/03/07/hexo_customize/)  
-[Hexo 优化与定制](http://lukang.me/categories/Hexo/)
+[Hexo 优化与定制](http://lukang.me/categories/Hexo/)  
+[Hexo 主题配置与优化](http://starsky.gitcafe.io/categories/%E7%94%B5%E8%84%91%E6%8A%80%E6%9C%AF/hexo/)
 
 [关于 Hexo 的若干问题](http://bubkoo.com/2013/12/16/hexo-issure/)  
 [Hexo常见问题解决方案](https://xuanwo.org/2014/08/14/hexo-usual-problem/#Hexo3-0%E4%BB%A5%E4%B8%8A%E6%94%AF%E6%8C%81)
